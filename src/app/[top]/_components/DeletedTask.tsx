@@ -1,10 +1,10 @@
-type DeletedTaskProps = {
-  index: number;
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
-  todos: string[];
-};
+import { IndexProps, TodoProps } from "../type";
 
-export function DeletedTask({ index, setTodos, todos }: DeletedTaskProps) {
+export function DeletedTask({
+  index,
+  setTodos,
+  todos,
+}: TodoProps & IndexProps) {
   // タスク削除（index指定）
   const handleDelete = (index: number) => {
     setTodos(todos.filter((_, i) => i !== index));

@@ -1,9 +1,5 @@
 import { useState } from "react";
-
-type TodoProps = {
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
-  todos: string[];
-};
+import { TodoProps } from "../type";
 
 export function CreateTodos({ setTodos, todos }: TodoProps) {
   const [text, setText] = useState("");

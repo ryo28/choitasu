@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { TodoProps } from "../type";
+import { ListStateProps } from "../type";
 
-export function CreateTodos({ setTodos, todos }: TodoProps) {
+export function CreateTodos({ setItems, items }: ListStateProps<string>) {
   const [text, setText] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // ページリロード防止
-    setTodos([...todos, text]); // TODOリストに追加
+    setItems([...items, text]); // TODOリストに追加
     setText(""); // 入力欄をクリア
   };
 

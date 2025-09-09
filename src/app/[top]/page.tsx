@@ -9,14 +9,14 @@ export default function Top() {
 
   return (
     <div>
-      <CreateTodos setTodos={setTodos} todos={todos} />
+      <CreateTodos setItems={setTodos} items={todos} />
       <div className="p-4">
         <h2 className="text-lg font-bold">タスク</h2>
         <ul>
           {todos.map((todo, index) => (
             <div key={index} className="flex gap-4">
               <li className="border-b py-2">{todo}</li>
-              <DeletedTask index={index} setTodos={setTodos} todos={todos} />
+              <DeletedTask index={index} setItems={setTodos} items={todos} />
             </div>
           ))}
         </ul>

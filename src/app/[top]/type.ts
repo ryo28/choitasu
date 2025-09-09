@@ -1,6 +1,6 @@
-export type TodoProps = {
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
-  todos: string[];
+export type ListStateProps<T> = {
+  setItems: React.Dispatch<React.SetStateAction<T[]>>;
+  items: T[];
 };
 
 export type IndexProps = {

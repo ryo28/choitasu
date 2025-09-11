@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ListStateProps } from "../type";
+import { clsx } from "clsx";
 
 export function CreateTodos({ setItems, items }: ListStateProps<string>) {
   const [text, setText] = useState("");
@@ -25,7 +26,10 @@ export function CreateTodos({ setItems, items }: ListStateProps<string>) {
       <button
         type="submit"
         disabled={!text.trim()} // 空白のみの場合は無効化
-        className="bg-blue-500 text-white p-2 rounded"
+        className={clsx(
+          "bg-blue-500 text-white p-2 rounded",
+          text.trim() ? "hover:bg-blue-600" : "opacity-50"
+        )}
       >
         追加
       </button>

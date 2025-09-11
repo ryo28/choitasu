@@ -14,9 +14,14 @@ export default function Top() {
         <h2 className="text-lg font-bold">タスク</h2>
         <ul>
           {todos.map((todo, index) => (
-            <div key={index} className="flex gap-4">
-              <li className="border-b py-2">{todo}</li>
-              <DeletedTask index={index} setItems={setTodos} items={todos} />
+            <div
+              key={index}
+              className="flex justify-between border-b px-4 hover:bg-gray-200 items-center"
+            >
+              <li className="py-2">{todo}</li>
+              <div className="shrink-0">
+                <DeletedTask index={index} setItems={setTodos} items={todos} />
+              </div>
             </div>
           ))}
         </ul>

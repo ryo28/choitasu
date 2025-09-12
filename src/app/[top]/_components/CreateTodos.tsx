@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { ListStateProps } from "../type";
+import { ListStateProps, Todo } from "../type";
 import { clsx } from "clsx";
 
-export function CreateTodos({ setItems, items }: ListStateProps<string>) {
+export function CreateTodos({ setItems, items }: ListStateProps<Todo>) {
   const [text, setText] = useState("");
+  const [taskColor, setTaskColor] = useState("bg-white");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // ページリロード防止
-    setItems([...items, text]); // TODOリストに追加
+    setItems([...items, { text, color: taskColor }]); // TODOリストに追加
     setText(""); // 入力欄をクリア
   };
 

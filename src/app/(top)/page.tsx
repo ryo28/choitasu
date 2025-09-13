@@ -6,6 +6,7 @@ import { CreateTodos } from "./_components/CreateTodos";
 import { TaskColorChange } from "./_components/TaskColorChange";
 import clsx from "clsx";
 import { Todo } from "./type";
+import { Checkbox } from "@heroui/react";
 
 const colors = [
   "bg-red-100",
@@ -34,7 +35,9 @@ export default function Top() {
                     todo.color
                   )}
                 >
-                  <li className="py-2">{todo.text}</li>
+                  <Checkbox defaultSelected lineThrough>
+                    <li className="py-2">{todo.text}</li>
+                  </Checkbox>
 
                   <div className="shrink-0 flex gap-8 pl-8">
                     <TaskColorChange

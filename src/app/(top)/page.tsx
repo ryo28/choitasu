@@ -24,22 +24,28 @@ export default function Top() {
       <CreateTodos setItems={setTodos} items={todos} />
       <div className="p-4">
         <h2 className="text-lg font-bold">タスク</h2>
-        <ul>
+        <ul className="space-y-4 mt-4">
           {todos.map(
             (todo, index) =>
               todo.text !== "" && (
                 <div
                   key={index}
                   className={clsx(
-                    "flex justify-between border-b px-4 hover:opacity-75 items-center",
+                    "flex justify-between py-2 px-4 rounded-2xl hover:opacity-75 items-center",
                     todo.color
                   )}
                 >
-                  <Checkbox defaultSelected lineThrough>
+                  <Checkbox
+                    lineThrough
+                    classNames={{
+                      label:
+                        "relative [&::before]:!hidden decoration-foreground decoration-2 group-data-[selected=true]:line-through",
+                    }} //labelオブジェクトのbefore疑似要素を非表示にし、選択時に取り消し線を適用
+                  >
                     <li className="py-2">{todo.text}</li>
                   </Checkbox>
 
-                  <div className="shrink-0 flex gap-8 pl-8">
+                  <div className="shrink-0 flex gap-8 pl-2">
                     <TaskColorChange
                       index={index}
                       setItems={setTodos}

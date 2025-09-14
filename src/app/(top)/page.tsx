@@ -6,7 +6,6 @@ import { CreateTodos } from "./_components/CreateTodos";
 import { TaskColorChange } from "./_components/TaskColorChange";
 import clsx from "clsx";
 import { Todo } from "./type";
-import { Checkbox } from "@heroui/react";
 
 const colors = [
   "bg-red-100",
@@ -35,15 +34,13 @@ export default function Top() {
                     todo.color
                   )}
                 >
-                  <Checkbox
-                    lineThrough
-                    classNames={{
-                      label:
-                        "relative [&::before]:!hidden decoration-foreground decoration-2 group-data-[selected=true]:line-through",
-                    }} //labelオブジェクトのbefore疑似要素を非表示にし、選択時に取り消し線を適用
+                  <label
+                    htmlFor={`todo-${index}`}
+                    className="flex items-center"
                   >
+                    <input type="checkbox" name="" id={`todo-${index}`} />
                     <li className="py-2">{todo.text}</li>
-                  </Checkbox>
+                  </label>
 
                   <div className="shrink-0 flex gap-8 pl-2">
                     <TaskColorChange

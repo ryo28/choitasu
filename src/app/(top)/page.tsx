@@ -6,6 +6,7 @@ import { CreateTodos } from "./_components/CreateTodos";
 import { TaskColorChange } from "./_components/TaskColorChange";
 import clsx from "clsx";
 import { Todo } from "./type";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const colors = [
   "bg-red-100",
@@ -16,8 +17,10 @@ const colors = [
   "bg-white",
 ];
 export default function Top() {
-  const [todos, setTodos] = useState<Todo[]>([{ text: "", color: "bg-white" }]);
-
+  const [todos, setTodos] = useState<Todo[]>([
+    { id: "", text: "", color: "bg-white" },
+  ]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   return (
     <div>
       <CreateTodos setItems={setTodos} items={todos} />
@@ -34,14 +37,29 @@ export default function Top() {
                     todo.color
                   )}
                 >
-                  <label
-                    htmlFor={`todo-${index}`}
-                    className="flex items-center"
-                  >
-                    <input type="checkbox" name="" id={`todo-${index}`} />
-                    <li className="py-2">{todo.text}</li>
-                  </label>
-
+                  <div className="flex items-center">
+                    <Checkbox
+                      value={todo.text}
+                      id={`todo-${index}`}
+                      isSelected={selectedIds.includes(todo.id)}
+                      onChange={(checked) => {
+                        setSelectedIds(
+                          (prev) =>
+                            checked
+                              ? [...prev, todo.id] // チェックされたら追加
+                              : prev.filter((id) => id !== todo.id) // 外されたら削除
+                        );
+                      }}
+                    />
+                    <label
+                      htmlFor={`todo-${index}`}
+                      className={clsx(
+                        selectedIds.includes(todo.id) ? "line-through" : ""
+                      )}
+                    >
+                      {todo.text}
+                    </label>
+                  </div>
                   <div className="shrink-0 flex gap-8 pl-2">
                     <TaskColorChange
                       index={index}

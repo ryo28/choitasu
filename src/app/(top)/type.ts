@@ -9,6 +9,7 @@ export type IndexProps = {
 
 // Todoアイテム: 個別に色インデックスを保持
 export type Todo = {
+  id: string;
   text: string;
   color: string;
 };

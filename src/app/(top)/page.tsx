@@ -54,6 +54,7 @@ export default function Top() {
                     <label
                       htmlFor={`todo-${index}`}
                       className={clsx(
+                        "select-none",
                         selectedIds.includes(todo.id) ? "line-through" : ""
                       )}
                     >

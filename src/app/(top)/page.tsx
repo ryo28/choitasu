@@ -17,12 +17,16 @@ const colors = [
   "bg-white",
 ];
 export default function Top() {
-  const [todos, setTodos] = useState<Todo[]>([
-    { id: "", text: "", color: "bg-white" },
-  ]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  console.log(selectedIds.length, "/", todos.length);
+
   return (
     <div>
+      <div className="flex justify-center items-center gap-2">
+        <div>{`${selectedIds.length} / ${todos.length}`}</div>
+        <span>完了</span>
+      </div>
       <CreateTodos setItems={setTodos} items={todos} />
       <div className="p-4">
         <h2 className="text-lg font-bold">タスク</h2>
@@ -69,9 +73,10 @@ export default function Top() {
                       colors={colors}
                     />
                     <DeletedTask
-                      index={index}
+                      id={todo.id}
                       setItems={setTodos}
                       items={todos}
+                      setSelectedIds={setSelectedIds}
                     />
                   </div>
                 </div>

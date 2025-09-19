@@ -37,7 +37,7 @@ export default function Top() {
                 <div
                   key={index}
                   className={clsx(
-                    "flex justify-between py-2 px-4 rounded-2xl hover:opacity-75 items-center",
+                    "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
                     todo.color
                   )}
                 >
@@ -62,7 +62,7 @@ export default function Top() {
                         selectedIds.includes(todo.id) ? "line-through" : ""
                       )}
                     >
-                      {todo.text}
+                      <div className="wrap-anywhere">{todo.text}</div>
                     </label>
                   </div>
                   <div className="shrink-0 flex gap-8 pl-2">

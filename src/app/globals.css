@@ -9,8 +9,10 @@
 @variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: "Geist Mono", 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace';
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "Geist Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco",
+    "Consolas", '"Liberation Mono"', '"Courier New"', "monospace";
 
   --font-sans--font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   --font-mono--font-feature-settings: "ss02", "zero";
@@ -121,38 +123,56 @@
 
   --radius-lg: var(--radius);
 
-  --radius-xl: calc(var(--radius) + 4px)
-;
+  --radius-xl: calc(var(--radius) + 4px);
   @keyframes disclosure-expanded {
-  from {
-    height: 0;}
-  to {
-    height: var(--disclosure-height);}}
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--disclosure-height);
+    }
+  }
   @keyframes disclosure-collapsed {
-  from {
-    height: var(--disclosure-height);}
-  to {
-    height: 0;}}
+    from {
+      height: var(--disclosure-height);
+    }
+    to {
+      height: 0;
+    }
+  }
   @keyframes disclosure-expanded {
-  from {
-    height: 0;}
-  to {
-    height: var(--disclosure-height);}}
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--disclosure-height);
+    }
+  }
   @keyframes disclosure-collapsed {
-  from {
-    height: var(--disclosure-height);}
-  to {
-    height: 0;}}
+    from {
+      height: var(--disclosure-height);
+    }
+    to {
+      height: 0;
+    }
+  }
   @keyframes disclosure-expanded {
-  from {
-    height: 0;}
-  to {
-    height: var(--disclosure-height);}}
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--disclosure-height);
+    }
+  }
   @keyframes disclosure-collapsed {
-  from {
-    height: var(--disclosure-height);}
-  to {
-    height: 0;}}}
+    from {
+      height: var(--disclosure-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
 
 :root {
   --bg: oklch(1 0 0);
@@ -256,7 +276,7 @@
   --secondary: oklch(0.244 0.006 286.033);
   --secondary-fg: oklch(0.985 0 0);
 
-  --overlay: oklch(0.210 0.006 285.885);
+  --overlay: oklch(0.21 0.006 285.885);
   --overlay-fg: oklch(0.985 0 0);
 
   --accent: oklch(0.274 0.006 286.033);
@@ -286,11 +306,11 @@
   --danger-subtle: oklch(0.637 0.237 25.331 / 0.1);
   --danger-subtle-fg: oklch(0.704 0.191 22.216);
 
-  --border: oklch(0.270 0.013 285.805);
-  --input: oklch(0.320 0.013 285.805);
+  --border: oklch(0.27 0.013 285.805);
+  --input: oklch(0.32 0.013 285.805);
   --ring: oklch(0.546 0.245 262.881);
 
-  --navbar: oklch(0.190 0.006 285.885);
+  --navbar: oklch(0.19 0.006 285.885);
   --navbar-fg: oklch(0.985 0 0);
 
   --sidebar: oklch(0.21 0.006 285.885);
@@ -324,7 +344,7 @@
 }
 
 @utility touch-target {
-    position: relative;
+  position: relative;
   &::before {
     content: "";
     position: absolute;
@@ -348,25 +368,36 @@
   ::file-selector-button {
     border-color: var(--border, currentColor);
   }
-  *, ::after, ::before, ::backdrop, ::file-selector-button {
-    border-color: var(--border, currentColor);}
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--border, currentColor);
+  }
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;}
+    scrollbar-color: var(--border) transparent;
+  }
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-tap-highlight-color: transparent;}
+    -webkit-tap-highlight-color: transparent;
+  }
   body {
     background-color: var(--bg);
-    color: var(--fg);}
+    color: var(--fg);
+  }
   ::-webkit-scrollbar {
-    width: 4px;}
+    width: 4px;
+  }
   ::-webkit-scrollbar-track {
-    background: transparent;}
+    background: transparent;
+  }
   ::-webkit-scrollbar-thumb {
     background: var(--border);
-    border-radius: 4px;}
+    border-radius: 4px;
+  }
 }
 
 @layer base {
@@ -382,6 +413,7 @@
   body {
     background-color: var(--bg);
     color: var(--fg);
+    overflow-wrap: anywhere;
   }
 
   ::-webkit-scrollbar {

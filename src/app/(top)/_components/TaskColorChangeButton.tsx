@@ -18,7 +18,11 @@ export function TaskColorChangeButton({
     );
   };
   return (
-    <button onClick={() => changeColor(index)}>
+    <button
+      onClick={() => changeColor(index)}
+      title="背景色変更"
+      aria-label="タスクの背景色を変更する"
+    >
       <div className="w-6 h-6 rounded-full bg-conic/decreasing from-violet-700 via-lime-300 to-violet-700"></div>
     </button>
   );

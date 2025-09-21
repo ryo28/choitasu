@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { DeletedTask } from "./_components/DeletedTask";
+import { DeletedTaskButton } from "./_components/DeletedTaskButton";
 import { CreateTodos } from "./_components/CreateTodos";
-import { TaskColorChange } from "./_components/TaskColorChange";
+import { TaskColorChangeButton } from "./_components/TaskColorChangeButton";
 import clsx from "clsx";
 import { Todo } from "./type";
 import { Checkbox } from "@/components/ui/checkbox";
-import { DeletedHistory } from "./_components/DeletedHistory";
+import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { History } from "lucide-react";
 
 //タスクの背景色の候補
@@ -77,7 +77,7 @@ export default function Top() {
                         <p>{todo.text}</p>
                       </label>
                     </div>
-                    <DeletedHistory
+                    <DeletedHistoryButton
                       id={todo.id}
                       deletedTodos={deletedTodos}
                       setDeletedTodos={setDeletedTodos}
@@ -130,13 +130,13 @@ export default function Top() {
                       </div>
 
                       <div className="shrink-0 flex gap-8 pl-2">
-                        <TaskColorChange
+                        <TaskColorChangeButton
                           index={index}
                           setItems={setTodos}
                           items={todos}
                           colors={colors}
                         />
-                        <DeletedTask
+                        <DeletedTaskButton
                           id={todo.id}
                           setItems={setTodos}
                           items={todos}

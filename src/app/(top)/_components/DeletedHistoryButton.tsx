@@ -2,7 +2,7 @@ import { Trash2 } from "lucide-react";
 import { SetState, Todo } from "../type";
 
 //削除履歴からデータを削除するコンポーネント
-export function DeletedHistory({
+export function DeletedHistoryButton({
   id,
   deletedTodos,
   setDeletedTodos,

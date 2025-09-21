@@ -1,6 +1,6 @@
 import { IndexProps, ListStateProps, Todo } from "../type";
 
-export function TaskColorChange({
+export function TaskColorChangeButton({
   index,
   setItems: setTodos,
   items: todos,

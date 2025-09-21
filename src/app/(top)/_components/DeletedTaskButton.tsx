@@ -2,7 +2,7 @@ import { Delete } from "lucide-react";
 import { ListStateProps, SetState, Todo } from "../type";
 
 //タスク削除ボタンをしつつ、削除したタスクをdeletedTodosに履歴として追加するコンポーネント
-export function DeletedTask({
+export function DeletedTaskButton({
   id: todoId,
   setItems: setTodos,
   items: todos,

@@ -9,6 +9,7 @@ import { Todo } from "./type";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { History } from "lucide-react";
+import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
 
 //タスクの背景色の候補
 const colors = [
@@ -24,7 +25,7 @@ export default function Top() {
   const [todos, setTodos] = useState<Todo[]>([]);
   //削除したタスクを保存する配列
   const [deletedTodos, setDeletedTodos] = useState<Todo[]>([]);
-  //選択されたタスクのidを保存する配列
+  //チェックされたタスクをIDで管理してカウントで使うための配列
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   //履歴表示・非表示の状態管理
   const [showHistory, setShowHistory] = useState(false);
@@ -33,12 +34,20 @@ export default function Top() {
     <div>
       <div className="flex justify-center items-center gap-2">
         {/* 完了タスクカウンター */}
-        <div>{`${selectedIds.length} / ${todos.length}`}</div>
-        <span>完了</span>
+        <button
+          onClick={() => setShowHistory(!showHistory)}
+          className="flex justify-center items-center gap-2"
+        >
+          <div>{`${selectedIds.length} / ${todos.length}`}</div>
+          <span>完了</span>
+        </button>
 
         {/* 履歴表示・非表示切り替えボタン */}
         <button
           onClick={() => setShowHistory(!showHistory)}
+          title="履歴表示切替"
+          aria-label="削除履歴の表示と非表示を切り替える"
+          aria-expanded={showHistory}
           className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
             showHistory
               ? "bg-purple-100 text-purple-700"
@@ -70,18 +79,28 @@ export default function Top() {
                       <label
                         htmlFor={`deleted-todo-${index}`}
                         className={clsx(
-                          "select-none",
                           selectedIds.includes(todo.id) ? "line-through" : ""
                         )}
                       >
                         <p>{todo.text}</p>
                       </label>
                     </div>
-                    <DeletedHistoryButton
-                      id={todo.id}
-                      deletedTodos={deletedTodos}
-                      setDeletedTodos={setDeletedTodos}
-                    />
+                    <div className="shrink-0 flex gap-8 pl-2">
+                      {/* 削除履歴復元ボタン */}
+                      <RestoreHistoryButton
+                        id={todo.id}
+                        items={todos}
+                        setItems={setTodos}
+                        deletedTodos={deletedTodos}
+                        setDeletedTodos={setDeletedTodos}
+                      />
+                      {/* 削除履歴のタスク完全削除ボタン */}
+                      <DeletedHistoryButton
+                        id={todo.id}
+                        deletedTodos={deletedTodos}
+                        setDeletedTodos={setDeletedTodos}
+                      />
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -121,7 +140,6 @@ export default function Top() {
                         <label
                           htmlFor={`todo-${index}`}
                           className={clsx(
-                            "select-none",
                             selectedIds.includes(todo.id) ? "line-through" : ""
                           )}
                         >
@@ -130,18 +148,20 @@ export default function Top() {
                       </div>
 
                       <div className="shrink-0 flex gap-8 pl-2">
+                        {/* bgカラー変更ボタン */}
                         <TaskColorChangeButton
                           index={index}
                           setItems={setTodos}
                           items={todos}
                           colors={colors}
                         />
+                        {/* タスク削除しつつ削除履歴に追加ボタン */}
                         <DeletedTaskButton
                           id={todo.id}
                           setItems={setTodos}
                           items={todos}
-                          setSelectedIds={setSelectedIds}
                           setDeletedTodos={setDeletedTodos}
+                          setSelectedIds={setSelectedIds}
                         />
                       </div>
                     </li>

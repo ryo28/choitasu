@@ -1,4 +1,4 @@
-import { Delete } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { ListStateProps, SetState, Todo } from "../type";
 
 //タスク削除ボタンをしつつ、削除したタスクをdeletedTodosに履歴として追加するコンポーネント
@@ -15,7 +15,7 @@ export function DeletedTaskButton({
   // タスク削除（index指定）
   const handleDeleteTodos = (id: string) => {
     setTodos(todos.filter((todo) => todo.id !== id));
-    // filterでidが一致しないものだけを抽出して新しい配列を作成
+    // 選択したid以外を新しい配列に返す(選択したidを削除)
     setSelectedIds((prev) => prev.filter((selectedId) => selectedId !== id));
     //削除したタスクをdeletedTodosに履歴として追加
     setDeletedTodos((prev) => [
@@ -24,8 +24,12 @@ export function DeletedTaskButton({
     ]);
   };
   return (
-    <button onClick={() => handleDeleteTodos(todoId)}>
-      <Delete className="text-gray-700" />
+    <button
+      onClick={() => handleDeleteTodos(todoId)}
+      title="削除"
+      aria-label="タスクを削除する"
+    >
+      <Trash2 className="text-gray-700" />
     </button>
   );
 }

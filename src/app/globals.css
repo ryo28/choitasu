@@ -414,6 +414,7 @@
     background-color: var(--bg);
     color: var(--fg);
     overflow-wrap: anywhere;
+    user-select: none;
   }
 
   ::-webkit-scrollbar {

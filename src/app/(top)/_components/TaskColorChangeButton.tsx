@@ -11,7 +11,6 @@ export function TaskColorChangeButton({
       prev.map((todo, i) => {
         if (i !== index) return todo;
         const currentIndex = colors.indexOf(todo.color);
-        console.log(currentIndex);
 
         const nextColor = colors[(currentIndex + 1) % colors.length];
         return { ...todo, color: nextColor };

@@ -18,7 +18,11 @@ export function DeletedHistoryButton({
     );
   };
   return (
-    <button onClick={() => handleDeleteHistory(id)}>
+    <button
+      onClick={() => handleDeleteHistory(id)}
+      title="完全に削除"
+      aria-label="削除履歴からタスクを完全に削除する"
+    >
       <Trash2 className="text-red-400" />
     </button>
   );

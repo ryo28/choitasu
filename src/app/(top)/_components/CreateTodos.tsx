@@ -28,6 +28,7 @@ export function CreateTodos({ setItems, items }: ListStateProps<Todo>) {
       <button
         type="submit"
         disabled={!text.trim()} // 空白のみの場合は無効化
+        aria-label="新しいタスクを追加する"
         className={clsx(
           "bg-blue-500 text-white p-2 rounded",
           text.trim() ? "hover:bg-blue-600" : "opacity-50"

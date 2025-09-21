@@ -7,7 +7,10 @@ import { TaskColorChange } from "./_components/TaskColorChange";
 import clsx from "clsx";
 import { Todo } from "./type";
 import { Checkbox } from "@/components/ui/checkbox";
+import { DeletedHistory } from "./_components/DeletedHistory";
+import { History } from "lucide-react";
 
+//タスクの背景色の候補
 const colors = [
   "bg-red-100",
   "bg-green-100",
@@ -17,72 +20,136 @@ const colors = [
   "bg-white",
 ];
 export default function Top() {
+  //タスクを保存する配列
   const [todos, setTodos] = useState<Todo[]>([]);
+  //削除したタスクを保存する配列
+  const [deletedTodos, setDeletedTodos] = useState<Todo[]>([]);
+  //選択されたタスクのidを保存する配列
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  console.log(selectedIds.length, "/", todos.length);
+  //履歴表示・非表示の状態管理
+  const [showHistory, setShowHistory] = useState(false);
 
   return (
     <div>
       <div className="flex justify-center items-center gap-2">
+        {/* 完了タスクカウンター */}
         <div>{`${selectedIds.length} / ${todos.length}`}</div>
         <span>完了</span>
+
+        {/* 履歴表示・非表示切り替えボタン */}
+        <button
+          onClick={() => setShowHistory(!showHistory)}
+          className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
+            showHistory
+              ? "bg-purple-100 text-purple-700"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          }`}
+        >
+          <History size={16} />
+          履歴 ({deletedTodos.length})
+        </button>
       </div>
       <CreateTodos setItems={setTodos} items={todos} />
       <div className="p-4">
-        <h2 className="text-lg font-bold">タスク</h2>
-        <ul className="space-y-4 mt-4">
-          {todos.map(
-            (todo, index) =>
-              todo.text !== "" && (
-                <div
-                  key={index}
-                  className={clsx(
-                    "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
-                    todo.color
-                  )}
-                >
-                  <div className="flex items-center">
-                    <Checkbox
-                      value={todo.text}
-                      id={`todo-${index}`}
-                      isSelected={selectedIds.includes(todo.id)}
-                      onChange={(checked) => {
-                        setSelectedIds(
-                          (prev) =>
-                            checked
-                              ? [...prev, todo.id] // チェックされたら追加
-                              : prev.filter((id) => id !== todo.id) // 外されたら削除
-                        );
-                      }}
+        {/* ボタンで履歴表示・非表示切替「非表示ならtodoを表示」 */}
+        {showHistory ? (
+          // 削除履歴にタスクがあれば表示、なければメッセージ表示
+          deletedTodos.length ? (
+            <div>
+              <h2 className="text-lg font-bold">削除履歴</h2>
+              <ul className="space-y-4 mt-4">
+                {deletedTodos.map((todo, index) => (
+                  <li
+                    key={index}
+                    className={clsx(
+                      "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
+                      "bg-red-50 border border-red-200"
+                    )}
+                  >
+                    <div className="flex items-center">
+                      <label
+                        htmlFor={`deleted-todo-${index}`}
+                        className={clsx(
+                          "select-none",
+                          selectedIds.includes(todo.id) ? "line-through" : ""
+                        )}
+                      >
+                        <p>{todo.text}</p>
+                      </label>
+                    </div>
+                    <DeletedHistory
+                      id={todo.id}
+                      deletedTodos={deletedTodos}
+                      setDeletedTodos={setDeletedTodos}
                     />
-                    <label
-                      htmlFor={`todo-${index}`}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>削除したタスクはありません</p>
+          )
+        ) : (
+          // 通常のtodo表示
+          <div>
+            <h2 className="text-lg font-bold">タスク</h2>
+            <ul className="space-y-4 mt-4">
+              {todos.map(
+                (todo, index) =>
+                  todo.text !== "" && (
+                    <li
+                      key={index}
                       className={clsx(
-                        "select-none",
-                        selectedIds.includes(todo.id) ? "line-through" : ""
+                        "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
+                        todo.color
                       )}
                     >
-                      <div className="wrap-anywhere">{todo.text}</div>
-                    </label>
-                  </div>
-                  <div className="shrink-0 flex gap-8 pl-2">
-                    <TaskColorChange
-                      index={index}
-                      setItems={setTodos}
-                      items={todos}
-                      colors={colors}
-                    />
-                    <DeletedTask
-                      id={todo.id}
-                      setItems={setTodos}
-                      items={todos}
-                      setSelectedIds={setSelectedIds}
-                    />
-                  </div>
-                </div>
-              )
-          )}
-        </ul>
+                      <div className="flex items-center">
+                        <Checkbox
+                          value={todo.text}
+                          id={`todo-${index}`}
+                          isSelected={selectedIds.includes(todo.id)}
+                          onChange={(checked) => {
+                            setSelectedIds(
+                              (prev) =>
+                                checked
+                                  ? [...prev, todo.id] // チェックされたら追加
+                                  : prev.filter((id) => id !== todo.id) // 外されたら削除
+                            );
+                          }}
+                        />
+                        <label
+                          htmlFor={`todo-${index}`}
+                          className={clsx(
+                            "select-none",
+                            selectedIds.includes(todo.id) ? "line-through" : ""
+                          )}
+                        >
+                          <div>{todo.text}</div>
+                        </label>
+                      </div>
+
+                      <div className="shrink-0 flex gap-8 pl-2">
+                        <TaskColorChange
+                          index={index}
+                          setItems={setTodos}
+                          items={todos}
+                          colors={colors}
+                        />
+                        <DeletedTask
+                          id={todo.id}
+                          setItems={setTodos}
+                          items={todos}
+                          setSelectedIds={setSelectedIds}
+                          setDeletedTodos={setDeletedTodos}
+                        />
+                      </div>
+                    </li>
+                  )
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

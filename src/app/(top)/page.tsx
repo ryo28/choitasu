@@ -83,6 +83,7 @@ export default function Top() {
                         )}
                       >
                         <p>{todo.text}</p>
+                        <span className="text-xs text-gray-500">{todo.date}</span>
                       </label>
                     </div>
                     <div className="shrink-0 flex gap-8 pl-2">

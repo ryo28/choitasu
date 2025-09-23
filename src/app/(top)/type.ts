@@ -15,4 +15,5 @@ export type Todo = {
   id: string;
   text: string;
   color: string;
+  date?: string; //削除日時を保存するためのプロパティ（任意）
 };

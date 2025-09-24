@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { History } from "lucide-react";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
+import { useTodoStore } from "./_store/store";
 
 //タスクの背景色の候補
 const colors = [
@@ -22,7 +23,8 @@ const colors = [
 ];
 export default function Top() {
   //タスクを保存する配列
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const todos = useTodoStore((state) => state.todos);
+  const setTodos = useTodoStore((state) => state.setTodos);
   //削除したタスクを保存する配列
   const [deletedTodos, setDeletedTodos] = useState<Todo[]>([]);
   //チェックされたタスクをIDで管理してカウントで使うための配列
@@ -58,7 +60,7 @@ export default function Top() {
           履歴 ({deletedTodos.length})
         </button>
       </div>
-      <CreateTodos setItems={setTodos} items={todos} />
+      <CreateTodos />
       <div className="p-4">
         {/* ボタンで履歴表示・非表示切替「非表示ならtodoを表示」 */}
         {showHistory ? (
@@ -83,15 +85,15 @@ export default function Top() {
                         )}
                       >
                         <p>{todo.text}</p>
-                        <span className="text-xs text-gray-500">{todo.date}</span>
+                        <span className="text-xs text-gray-500">
+                          {todo.date}
+                        </span>
                       </label>
                     </div>
                     <div className="shrink-0 flex gap-8 pl-2">
                       {/* 削除履歴復元ボタン */}
                       <RestoreHistoryButton
                         id={todo.id}
-                        items={todos}
-                        setItems={setTodos}
                         deletedTodos={deletedTodos}
                         setDeletedTodos={setDeletedTodos}
                       />
@@ -150,17 +152,10 @@ export default function Top() {
 
                       <div className="shrink-0 flex gap-8 pl-2">
                         {/* bgカラー変更ボタン */}
-                        <TaskColorChangeButton
-                          index={index}
-                          setItems={setTodos}
-                          items={todos}
-                          colors={colors}
-                        />
+                        <TaskColorChangeButton index={index} colors={colors} />
                         {/* タスク削除しつつ削除履歴に追加ボタン */}
                         <DeletedTaskButton
                           id={todo.id}
-                          setItems={setTodos}
-                          items={todos}
                           setDeletedTodos={setDeletedTodos}
                           setSelectedIds={setSelectedIds}
                         />

@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { ListStateProps, Todo } from "../type";
 import { clsx } from "clsx";
 import { v4 as uuidv4 } from "uuid";
+import { useTodoStore } from "../_store/store";
 
-export function CreateTodos({ setItems, items }: ListStateProps<Todo>) {
+export function CreateTodos() {
+  const todos = useTodoStore((state) => state.todos);
+  const setTodos = useTodoStore((state) => state.setTodos);
   const [text, setText] = useState("");
-  const [taskColor, setTaskColor] = useState("bg-white");
+  const [taskColor] = useState("bg-white");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // ページリロード防止
-    setItems([...items, { id: uuidv4(), text, color: taskColor }]); // TODOリストに追加
+    setTodos(() => [...todos, { id: uuidv4(), text, color: taskColor }]); // TODOリストに追加
     setText(""); // 入力欄をクリア
   };
 

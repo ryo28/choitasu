@@ -1,16 +1,17 @@
 import { Undo2 } from "lucide-react";
 import { ListStateProps, SetState, Todo } from "../type";
+import { useTodoStore } from "../_store/store";
 
 //タスク削除ボタンをしつつ、削除したタスクをdeletedTodosに履歴として追加するコンポーネント
 export function RestoreHistoryButton({
   id: todoId,
-  setItems: setTodos,
   deletedTodos,
   setDeletedTodos,
-}: ListStateProps<Todo> & {
+}: {
   id: string;
   deletedTodos: Todo[];
 } & { setDeletedTodos: SetState<Todo[]> }) {
+  const setTodos = useTodoStore((state) => state.setTodos);
   // タスク削除（index指定）
   const handleRestoreTodos = (id: string) => {
     //選択したidのタスク履歴以外を新し配列のタスク履歴に返す(選択した履歴を削除)

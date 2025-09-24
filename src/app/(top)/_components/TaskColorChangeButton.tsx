@@ -1,11 +1,11 @@
-import { IndexProps, ListStateProps, Todo } from "../type";
+import { useTodoStore } from "../_store/store";
+import { IndexProps } from "../type";
 
 export function TaskColorChangeButton({
   index,
-  setItems: setTodos,
-  items: todos,
   colors,
-}: ListStateProps<Todo> & IndexProps & { colors: string[] }) {
+}: IndexProps & { colors: string[] }) {
+  const setTodos = useTodoStore((state) => state.setTodos);
   const changeColor = (index: number) => {
     setTodos((prev) =>
       prev.map((todo, i) => {

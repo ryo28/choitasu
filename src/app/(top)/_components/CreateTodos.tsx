@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { clsx } from "clsx";
 import { v4 as uuidv4 } from "uuid";
-import { useTodoStore } from "../_store/store";
+import { useTodoStore } from "../_store/todoStore";
 
 export function CreateTodos() {
   const todos = useTodoStore((state) => state.todos);

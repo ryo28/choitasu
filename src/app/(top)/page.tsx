@@ -9,7 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { History } from "lucide-react";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
-import { useTodoStore } from "./_store/store";
+import { useTodoStore } from "./_store/todoStore";
 import { useDeletedTodoStore } from "./_store/deletedTodoStore";
 
 //タスクの背景色の候補

@@ -1,5 +1,5 @@
 import { Undo2 } from "lucide-react";
-import { useTodoStore } from "../_store/store";
+import { useTodoStore } from "../_store/todoStore";
 import { useDeletedTodoStore } from "../_store/deletedTodoStore";
 
 //タスク削除ボタンをしつつ、削除したタスクをdeletedTodosに履歴として追加するコンポーネント

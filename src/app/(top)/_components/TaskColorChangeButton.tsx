@@ -1,4 +1,4 @@
-import { useTodoStore } from "../_store/store";
+import { useTodoStore } from "../_store/todoStore";
 import { IndexProps } from "../type";
 
 export function TaskColorChangeButton({

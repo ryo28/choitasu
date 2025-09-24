@@ -1,20 +1,21 @@
 import { Trash2 } from "lucide-react";
-import { SetState, Todo } from "../type";
+import { SetState } from "../type";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
-import { useTodoStore } from "../_store/store";
+import { useDeletedTodoStore, useTodoStore } from "../_store/store";
 
 //タスク削除ボタンをしつつ、削除したタスクをdeletedTodosに履歴として追加するコンポーネント
 export function DeletedTaskButton({
   id: todoId,
   setSelectedIds,
-  setDeletedTodos,
 }: {
   id: string;
   setSelectedIds: SetState<string[]>;
-} & { setDeletedTodos: SetState<Todo[]> }) {
+}) {
   const todos = useTodoStore((state) => state.todos);
   const setTodos = useTodoStore((state) => state.setTodos);
+  //削除したタスクを保存する配列
+  const setDeletedTodos = useDeletedTodoStore((state) => state.setTodos);
   // タスク削除（index指定）
   const handleDeleteTodos = (id: string) => {
     const today = new Date(); //削除日時を追加

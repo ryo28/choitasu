@@ -1,15 +1,12 @@
 import { Trash2 } from "lucide-react";
-import { SetState, Todo } from "../type";
+import { Todo } from "../type";
+import { useDeletedTodoStore, useTodoStore } from "../_store/store";
 
 //削除履歴からデータを削除するコンポーネント
-export function DeletedHistoryButton({
-  id,
-  deletedTodos,
-  setDeletedTodos,
-}: {
-  id: string;
-  deletedTodos: Todo[];
-} & { setDeletedTodos: SetState<Todo[]> }) {
+export function DeletedHistoryButton({ id }: { id: string }) {
+  //削除したタスクを保存する配列
+  const deletedTodos = useDeletedTodoStore((state) => state.todos);
+  const setDeletedTodos = useDeletedTodoStore((state) => state.setTodos);
   // タスク削除（index指定）
   const handleDeleteHistory = (id: string) => {
     setDeletedTodos(() =>

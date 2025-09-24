@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { History } from "lucide-react";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
-import { useTodoStore } from "./_store/store";
+import { useDeletedTodoStore, useTodoStore } from "./_store/store";
 
 //タスクの背景色の候補
 const colors = [
@@ -24,9 +24,8 @@ const colors = [
 export default function Top() {
   //タスクを保存する配列
   const todos = useTodoStore((state) => state.todos);
-  const setTodos = useTodoStore((state) => state.setTodos);
   //削除したタスクを保存する配列
-  const [deletedTodos, setDeletedTodos] = useState<Todo[]>([]);
+  const deletedTodos = useDeletedTodoStore((state) => state.todos);
   //チェックされたタスクをIDで管理してカウントで使うための配列
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   //履歴表示・非表示の状態管理
@@ -92,17 +91,9 @@ export default function Top() {
                     </div>
                     <div className="shrink-0 flex gap-8 pl-2">
                       {/* 削除履歴復元ボタン */}
-                      <RestoreHistoryButton
-                        id={todo.id}
-                        deletedTodos={deletedTodos}
-                        setDeletedTodos={setDeletedTodos}
-                      />
+                      <RestoreHistoryButton id={todo.id} />
                       {/* 削除履歴のタスク完全削除ボタン */}
-                      <DeletedHistoryButton
-                        id={todo.id}
-                        deletedTodos={deletedTodos}
-                        setDeletedTodos={setDeletedTodos}
-                      />
+                      <DeletedHistoryButton id={todo.id} />
                     </div>
                   </li>
                 ))}
@@ -156,7 +147,6 @@ export default function Top() {
                         {/* タスク削除しつつ削除履歴に追加ボタン */}
                         <DeletedTaskButton
                           id={todo.id}
-                          setDeletedTodos={setDeletedTodos}
                           setSelectedIds={setSelectedIds}
                         />
                       </div>

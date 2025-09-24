@@ -2,7 +2,8 @@ import { Trash2 } from "lucide-react";
 import { SetState } from "../type";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
-import { useDeletedTodoStore, useTodoStore } from "../_store/store";
+import { useTodoStore } from "../_store/store";
+import { useDeletedTodoStore } from "../_store/deletedTodoStore";
 
 //タスク削除ボタンをしつつ、削除したタスクをdeletedTodosに履歴として追加するコンポーネント
 export function DeletedTaskButton({

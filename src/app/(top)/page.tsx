@@ -5,12 +5,12 @@ import { DeletedTaskButton } from "./_components/DeletedTaskButton";
 import { CreateTodos } from "./_components/CreateTodos";
 import { TaskColorChangeButton } from "./_components/TaskColorChangeButton";
 import clsx from "clsx";
-import { Todo } from "./type";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { History } from "lucide-react";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
-import { useDeletedTodoStore, useTodoStore } from "./_store/store";
+import { useTodoStore } from "./_store/store";
+import { useDeletedTodoStore } from "./_store/deletedTodoStore";
 
 //タスクの背景色の候補
 const colors = [

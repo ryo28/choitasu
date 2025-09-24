@@ -1,6 +1,5 @@
 import { Trash2 } from "lucide-react";
-import { Todo } from "../type";
-import { useDeletedTodoStore, useTodoStore } from "../_store/store";
+import { useDeletedTodoStore } from "../_store/deletedTodoStore";
 
 //削除履歴からデータを削除するコンポーネント
 export function DeletedHistoryButton({ id }: { id: string }) {

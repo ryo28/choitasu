@@ -11,6 +11,7 @@ import { History } from "lucide-react";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
 import { useTodoStore } from "./_store/todoStore";
 import { useDeletedTodoStore } from "./_store/deletedTodoStore";
+import { useSelectedIdStore } from "./_store/selectedIdStore";
 
 //タスクの背景色の候補
 const colors = [
@@ -27,7 +28,8 @@ export default function Top() {
   //削除したタスクを保存する配列
   const deletedTodos = useDeletedTodoStore((state) => state.todos);
   //チェックされたタスクをIDで管理してカウントで使うための配列
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const selectedIds = useSelectedIdStore((state) => state.selectedIds);
+  const setSelectedIds = useSelectedIdStore((state) => state.setSelectedIds);
   //履歴表示・非表示の状態管理
   const [showHistory, setShowHistory] = useState(false);
 
@@ -145,10 +147,7 @@ export default function Top() {
                         {/* bgカラー変更ボタン */}
                         <TaskColorChangeButton index={index} colors={colors} />
                         {/* タスク削除しつつ削除履歴に追加ボタン */}
-                        <DeletedTaskButton
-                          id={todo.id}
-                          setSelectedIds={setSelectedIds}
-                        />
+                        <DeletedTaskButton id={todo.id} />
                       </div>
                     </li>
                   )

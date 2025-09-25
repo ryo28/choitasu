@@ -4,19 +4,16 @@ import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useTodoStore } from "../_store/todoStore";
 import { useDeletedTodoStore } from "../_store/deletedTodoStore";
+import { useSelectedIdStore } from "../_store/selectedIdStore";
 
 //タスク削除ボタンをしつつ、削除したタスクをdeletedTodosに履歴として追加するコンポーネント
-export function DeletedTaskButton({
-  id: todoId,
-  setSelectedIds,
-}: {
-  id: string;
-  setSelectedIds: SetState<string[]>;
-}) {
+export function DeletedTaskButton({ id: todoId }: { id: string }) {
   const todos = useTodoStore((state) => state.todos);
   const setTodos = useTodoStore((state) => state.setTodos);
   //削除したタスクを保存する配列
   const setDeletedTodos = useDeletedTodoStore((state) => state.setTodos);
+  //チェックされたタスクをIDで管理してカウントで使うための配列
+  const setSelectedIds = useSelectedIdStore((state) => state.setSelectedIds);
   // タスク削除（index指定）
   const handleDeleteTodos = (id: string) => {
     const today = new Date(); //削除日時を追加

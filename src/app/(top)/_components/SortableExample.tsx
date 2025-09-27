@@ -57,6 +57,7 @@ export default function SortableExample() {
     <div>
       {/* DndContext: ドラッグ&ドロップの範囲を定義 - 縦方向のみに制限 */}
       <DndContext
+        id="custom-id-for-dnd-context"
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}

@@ -18,7 +18,6 @@ export default function Top() {
   const deletedTodos = useDeletedTodoStore((state) => state.todos);
   //チェックされたタスクをIDで管理してカウントで使うための配列
   const selectedIds = useSelectedIdStore((state) => state.selectedIds);
-  const setSelectedIds = useSelectedIdStore((state) => state.setSelectedIds);
   //履歴表示・非表示の状態管理
   const [showHistory, setShowHistory] = useState(false);
 
@@ -97,6 +96,7 @@ export default function Top() {
           // 通常のtodo表示
           <div>
             <h2 className="text-lg font-bold">タスク</h2>
+            {/* ドラッグ入れ替え可能なリスト */}
             <SortableExample />
           </div>
         )}

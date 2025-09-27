@@ -1,5 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { GripVertical } from "lucide-react";
 import React from "react";
 
 export function SortableItem({
@@ -30,25 +31,22 @@ export function SortableItem({
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className="sortable-item"
+    >
       <div className="flex items-center gap-2">
-        {/* ドラッグハンドル（つまみ）*/}
+        {/* ドラッグハンドル（つまみ）- スマホ対応版 */}
         <button
           ref={setActivatorNodeRef}
           {...listeners}
-          className="p-1 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-600 flex-shrink-0"
+          className="drag-handle p-3 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-600 flex-shrink-0 touch-none select-none"
+          style={{ touchAction: "none" }} // スクロール無効化
           aria-label="ドラッグして並び替え"
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="rotate-90"
-          >
-            {/* 3本線のアイコン（つまみ） */}
-            <path d="M2 4h12v1H2V4zm0 3.5h12v1H2v-1zM2 11h12v1H2v-1z" />
-          </svg>
+          <GripVertical />
         </button>
 
         {/* メインコンテンツ */}

@@ -9,6 +9,7 @@ import {
   useSensors,
   DragEndEvent,
 } from "@dnd-kit/core";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import {
   arrayMove,
   SortableContext,
@@ -24,9 +25,14 @@ export default function SortableExample() {
   const todos = useTodoStore((state) => state.todos);
   const setTodos = useTodoStore((state) => state.setTodos);
 
-  // ドラッグ操作のセンサー設定
+  // ドラッグ操作のセンサー設定 - スマホ対応強化
   const sensors = useSensors(
-    useSensor(PointerSensor), // マウス/タッチ操作
+    useSensor(PointerSensor, {
+      // タッチ操作の感度を調整
+      activationConstraint: {
+        distance: 8, // 8px移動したらドラッグ開始
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates, // キーボード操作
     })
@@ -48,14 +54,13 @@ export default function SortableExample() {
   }
 
   return (
-    <div className="p-4">
-      <h2 className="text-lg font-bold mb-4">ソート可能なTodoリスト</h2>
-
-      {/* DndContext: ドラッグ&ドロップの範囲を定義 */}
+    <div>
+      {/* DndContext: ドラッグ&ドロップの範囲を定義 - 縦方向のみに制限 */}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
+        modifiers={[restrictToVerticalAxis]} // 縦方向のみの移動に制限
       >
         {/* SortableContext: ソート可能なアイテムのコンテナ */}
         <SortableContext items={todos} strategy={verticalListSortingStrategy}>

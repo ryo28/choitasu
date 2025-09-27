@@ -1,21 +1,22 @@
-const colors = [
-  "bg-red-100",
-  "bg-green-100",
-  "bg-blue-100",
-  "bg-yellow-100",
-  "bg-purple-100",
-  "bg-white",
-];
+import { v4 as uuidv4 } from 'uuid';
 
+const colors = [
+    "bg-red-100",
+    "bg-green-100",
+    "bg-blue-100",
+    "bg-yellow-100",
+    "bg-purple-100",
+    "bg-white",
+];
 export const todoTestItems = [
-    { id: "1", text: "Learn TypeScript", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "2", text: "Build a React app", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "3", text: "Write unit tests", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "4", text: "Deploy to production", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "5", text: "Code review", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "6", text: "Update documentation", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "7", text: "Fix bugs", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "8", text: "Refactor code", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "9", text: "Add new features", color: colors[Math.floor(Math.random() * colors.length)] },
-    { id: "10", text: "Optimize performance", color: colors[Math.floor(Math.random() * colors.length)] },
+    { id: uuidv4(), text: "Learn TypeScript", color: colors[0] },
+    { id: uuidv4(), text: "Build a React app", color: colors[1] },
+    { id: uuidv4(), text: "Write unit tests", color: colors[2] },
+    { id: uuidv4(), text: "Deploy to production", color: colors[3] },
+    { id: uuidv4(), text: "Code review", color: colors[4] },
+    { id: uuidv4(), text: "Update documentation", color: colors[5] },
+    { id: uuidv4(), text: "Fix bugs", color: colors[0] },
+    { id: uuidv4(), text: "Refactor code", color: colors[1] },
+    { id: uuidv4(), text: "Add new features", color: colors[2] },
+    { id: uuidv4(), text: "Optimize performance", color: colors[3] },
 ];

@@ -1,27 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { DeletedTaskButton } from "./_components/DeletedTaskButton";
 import { CreateTodos } from "./_components/CreateTodos";
-import { TaskColorChangeButton } from "./_components/TaskColorChangeButton";
 import clsx from "clsx";
-import { Checkbox } from "@/components/ui/checkbox";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { History } from "lucide-react";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
 import { useTodoStore } from "./_store/todoStore";
 import { useDeletedTodoStore } from "./_store/deletedTodoStore";
 import { useSelectedIdStore } from "./_store/selectedIdStore";
+import SortableExample from "./_components/SortableExample";
 
-//タスクの背景色の候補
-const colors = [
-  "bg-red-100",
-  "bg-green-100",
-  "bg-blue-100",
-  "bg-yellow-100",
-  "bg-purple-100",
-  "bg-white",
-];
 export default function Top() {
   //タスクを保存する配列
   const todos = useTodoStore((state) => state.todos);
@@ -108,51 +97,7 @@ export default function Top() {
           // 通常のtodo表示
           <div>
             <h2 className="text-lg font-bold">タスク</h2>
-            <ul className="space-y-4 mt-4">
-              {todos.map(
-                (todo, index) =>
-                  todo.text !== "" && (
-                    <li
-                      key={index}
-                      className={clsx(
-                        "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
-                        todo.color
-                      )}
-                    >
-                      <div className="flex items-center">
-                        <Checkbox
-                          value={todo.text}
-                          id={`todo-${index}`}
-                          isSelected={selectedIds.includes(todo.id)}
-                          onChange={(checked) => {
-                            setSelectedIds(
-                              (prev) =>
-                                checked
-                                  ? [...prev, todo.id] // チェックされたら追加
-                                  : prev.filter((id) => id !== todo.id) // 外されたら削除
-                            );
-                          }}
-                        />
-                        <label
-                          htmlFor={`todo-${index}`}
-                          className={clsx(
-                            selectedIds.includes(todo.id) ? "line-through" : ""
-                          )}
-                        >
-                          <div>{todo.text}</div>
-                        </label>
-                      </div>
-
-                      <div className="shrink-0 flex gap-8 pl-2">
-                        {/* bgカラー変更ボタン */}
-                        <TaskColorChangeButton index={index} colors={colors} />
-                        {/* タスク削除しつつ削除履歴に追加ボタン */}
-                        <DeletedTaskButton id={todo.id} />
-                      </div>
-                    </li>
-                  )
-              )}
-            </ul>
+            <SortableExample />
           </div>
         )}
       </div>

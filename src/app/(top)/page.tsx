@@ -57,7 +57,7 @@ export default function Top() {
           deletedTodos.length ? (
             <div>
               <h2 className="text-lg font-bold">削除履歴</h2>
-              <ul className="space-y-4 mt-4">
+              <ul className="space-y-4 mt-4 overflow-y-auto max-h-64">
                 {deletedTodos.map((todo, index) => (
                   <li
                     key={index}

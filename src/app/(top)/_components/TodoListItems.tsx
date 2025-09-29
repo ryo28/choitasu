@@ -22,7 +22,7 @@ export function TodoListItems() {
   const selectedIds = useSelectedIdStore((state) => state.selectedIds);
   const setSelectedIds = useSelectedIdStore((state) => state.setSelectedIds);
   return (
-    <ul className="space-y-2 overflow-y-auto max-h-72 py-4">
+    <ul className="space-y-2 overflow-y-auto max-h-[calc(100vh-400px)] md:max-h-[calc(100vh-350px)] py-4 px-2">
       {todos.map((todo, index) => (
         <SortableItem key={todo.id} id={todo.id}>
           <div

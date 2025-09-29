@@ -58,7 +58,7 @@ export default function Top() {
           // 削除履歴にタスクがあれば表示、なければメッセージ表示
           deletedTodos.length ? (
             <div>
-              <h2 className="text-lg font-bold pb-4">削除履歴</h2>
+              <h2 className="text-lg font-bold pb-4 px-4">削除履歴</h2>
               <ul className="space-y-4 overflow-y-auto max-h-[calc(100vh-400px)] md:max-h-[calc(100vh-350px)] py-4 px-2">
                 {deletedTodos.map((todo, index) => (
                   <li
@@ -92,12 +92,12 @@ export default function Top() {
               </ul>
             </div>
           ) : (
-            <p>削除したタスクはありません</p>
+            <p className="px-4">削除したタスクはありません</p>
           )
         ) : (
           // 通常のtodo表示
           <div className="min-h-[calc(100vh-350px)]">
-            <h2 className="text-lg font-bold">タスク</h2>
+            <h2 className="text-lg font-bold px-4">タスク</h2>
             {/* ドラッグ入れ替え可能なリスト */}
             <SortableExample />
           </div>

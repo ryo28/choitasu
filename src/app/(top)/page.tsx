@@ -21,7 +21,6 @@ export default function Top() {
   const selectedIds = useSelectedIdStore((state) => state.selectedIds);
   //履歴表示・非表示の状態管理
   const [showHistory, setShowHistory] = useState(false);
-console.log(selectedIds.length);
 
   useEffect(() => {
     // マウント時にだけ30日以上前のデータを削除

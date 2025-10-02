@@ -65,35 +65,38 @@ export default function Top() {
             <div>
               <h2 className="text-lg font-bold pb-4 px-4">削除履歴</h2>
               <ul className="space-y-4 overflow-y-auto max-h-[calc(100vh-400px)] md:max-h-[calc(100vh-350px)] py-4 px-2">
-                {deletedTodos.map((todo, index) => (
-                  <li
-                    key={index}
-                    className={clsx(
-                      "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
-                      "bg-red-50 border border-red-200"
-                    )}
-                  >
-                    <div className="flex items-center">
-                      <label
-                        htmlFor={`deleted-todo-${index}`}
-                        className={clsx(
-                          selectedIds.includes(todo.id) ? "line-through" : ""
-                        )}
-                      >
-                        <p>{todo.text}</p>
-                        <span className="text-xs text-gray-500">
-                          {todo.date}
-                        </span>
-                      </label>
-                    </div>
-                    <div className="shrink-0 flex gap-8 pl-2">
-                      {/* 削除履歴復元ボタン */}
-                      <RestoreHistoryButton id={todo.id} />
-                      {/* 削除履歴のタスク完全削除ボタン */}
-                      <DeletedHistoryButton id={todo.id} />
-                    </div>
-                  </li>
-                ))}
+                {deletedTodos
+                  .slice()
+                  .reverse()
+                  .map((todo) => (
+                    <li
+                      key={todo.id}
+                      className={clsx(
+                        "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
+                        "bg-red-50 border border-red-200"
+                      )}
+                    >
+                      <div className="flex items-center">
+                        <label
+                          htmlFor={todo.id}
+                          className={clsx(
+                            selectedIds.includes(todo.id) ? "line-through" : ""
+                          )}
+                        >
+                          <p>{todo.text}</p>
+                          <span className="text-xs text-gray-500">
+                            {todo.date}
+                          </span>
+                        </label>
+                      </div>
+                      <div className="shrink-0 flex gap-8 pl-2">
+                        {/* 削除履歴復元ボタン */}
+                        <RestoreHistoryButton id={todo.id} />
+                        {/* 削除履歴のタスク完全削除ボタン */}
+                        <DeletedHistoryButton id={todo.id} />
+                      </div>
+                    </li>
+                  ))}
               </ul>
             </div>
           ) : (

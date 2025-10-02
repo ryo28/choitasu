@@ -23,48 +23,51 @@ export function TodoListItems() {
   const setSelectedIds = useSelectedIdStore((state) => state.setSelectedIds);
   return (
     <ul className="space-y-2 overflow-y-auto max-h-[calc(100vh-400px)] md:max-h-[calc(100vh-350px)] py-4 px-2">
-      {todos.map((todo, index) => (
-        <SortableItem key={todo.id} id={todo.id}>
-          <div
-            className={clsx(
-              "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
-              todo.color
-            )}
-          >
-            <div className="flex items-center flex-1">
-              <Checkbox
-                value={todo.text}
-                id={`todo-${index}`}
-                isSelected={selectedIds.includes(todo.id)}
-                onChange={(checked) => {
-                  setSelectedIds(
-                    (prev) =>
-                      checked
-                        ? [...prev, todo.id] // チェックされたら追加
-                        : prev.filter((id) => id !== todo.id) // 外されたら削除
-                  );
-                }}
-              />
-              <label
-                htmlFor={`todo-${index}`}
-                className={clsx(
-                  "ml-3 flex-1",
-                  selectedIds.includes(todo.id) ? "line-through" : ""
-                )}
-              >
-                <div>{todo.text}</div>
-              </label>
-            </div>
+      {todos
+        .slice()
+        .reverse()
+        .map((todo) => (
+          <SortableItem key={todo.id} id={todo.id}>
+            <div
+              className={clsx(
+                "flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
+                todo.color
+              )}
+            >
+              <div className="flex items-center flex-1">
+                <Checkbox
+                  value={todo.text}
+                  id={todo.id}
+                  isSelected={selectedIds.includes(todo.id)}
+                  onChange={(checked) => {
+                    setSelectedIds(
+                      (prev) =>
+                        checked
+                          ? [...prev, todo.id] // チェックされたら追加
+                          : prev.filter((id) => id !== todo.id) // 外されたら削除
+                    );
+                  }}
+                />
+                <label
+                  htmlFor={todo.id}
+                  className={clsx(
+                    "ml-3 flex-1",
+                    selectedIds.includes(todo.id) ? "line-through" : ""
+                  )}
+                >
+                  <div>{todo.text}</div>
+                </label>
+              </div>
 
-            <div className="shrink-0 flex gap-8 pl-2">
-              {/* bgカラー変更ボタン */}
-              <TaskColorChangeButton index={index} colors={colors} />
-              {/* タスク削除しつつ削除履歴に追加ボタン */}
-              <DeletedTaskButton id={todo.id} />
+              <div className="shrink-0 flex gap-8 pl-2">
+                {/* bgカラー変更ボタン */}
+                <TaskColorChangeButton id={todo.id} colors={colors} />
+                {/* タスク削除しつつ削除履歴に追加ボタン */}
+                <DeletedTaskButton id={todo.id} />
+              </div>
             </div>
-          </div>
-        </SortableItem>
-      ))}
+          </SortableItem>
+        ))}
     </ul>
   );
 }

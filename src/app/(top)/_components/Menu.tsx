@@ -33,7 +33,7 @@ export function SheetDemo() {
           <div className="grid gap-3">利用規約</div>
           <div className="grid gap-3">Contact</div>
           <div className="grid gap-3">
-            © 2025~{new Date().getFullYear()} Wakisan. All rights reserved.
+            © 2025~{new Date().getFullYear()} Waki. All rights reserved.
           </div>
         </footer>
         <SheetFooter>

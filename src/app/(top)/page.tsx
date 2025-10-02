@@ -64,7 +64,7 @@ export default function Top() {
           deletedTodos.length ? (
             <div>
               <h2 className="text-lg font-bold pb-4 px-4">削除履歴</h2>
-              <ul className="space-y-4 overflow-y-auto max-h-[calc(100vh-400px)] md:max-h-[calc(100vh-350px)] py-4 px-2">
+              <ul className="space-y-4 overflow-y-auto touch-pan-y max-h-[calc(100vh-400px)] md:max-h-[calc(100vh-350px)] py-4 px-2">
                 {deletedTodos
                   .slice()
                   .reverse()

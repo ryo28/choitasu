@@ -5,10 +5,6 @@ export type ListStateProps<T> = {
   items: T[];
 };
 
-export type IndexProps = {
-  index: number;
-};
-
 // Todoアイテム: 個別に色インデックスを保持bgカラー用
 //idは識別用、textは表示用
 export type Todo = {

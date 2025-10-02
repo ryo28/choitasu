@@ -1,15 +1,17 @@
 import { useTodoStore } from "../_store/todoStore";
-import { IndexProps } from "../type";
 
 export function TaskColorChangeButton({
-  index,
+  id: todoId,
   colors,
-}: IndexProps & { colors: string[] }) {
+}: {
+  id: string;
+  colors: string[];
+}) {
   const setTodos = useTodoStore((state) => state.setTodos);
-  const changeColor = (index: number) => {
+  const changeColor = (todoId: string) => {
     setTodos((prev) =>
-      prev.map((todo, i) => {
-        if (i !== index) return todo;
+      prev.map((todo) => {
+        if (todo.id !== todoId) return todo;
         const currentIndex = colors.indexOf(todo.color);
 
         const nextColor = colors[(currentIndex + 1) % colors.length];
@@ -19,7 +21,7 @@ export function TaskColorChangeButton({
   };
   return (
     <button
-      onClick={() => changeColor(index)}
+      onClick={() => changeColor(todoId)}
       title="背景色変更"
       aria-label="タスクの背景色を変更する"
     >

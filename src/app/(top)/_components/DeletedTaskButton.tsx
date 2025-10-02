@@ -1,5 +1,4 @@
 import { Trash2 } from "lucide-react";
-import { SetState } from "../type";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useTodoStore } from "../_store/todoStore";

@@ -15,5 +15,8 @@ export type Todo = {
   id: string;
   text: string;
   color: string;
-  date?: string; //削除日時を保存するためのプロパティ（任意）
+};
+//削除したタスク用の型、日付を追加
+export type DeletedTodo = Todo & {
+  date: string;
 };

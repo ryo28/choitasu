@@ -1,6 +1,7 @@
 import { Todo } from "../type";
 
-export type TodoState = {
-  todos: Todo[];
-  setTodos: (updater: (prev: Todo[]) => Todo[]) => void;
+export type TodoState<T = Todo> = {
+  todos: T[];
+  setTodos: (updater: (prev: T[]) => T[]) => void;
+  cleanOldTodos?: () => void;
 };

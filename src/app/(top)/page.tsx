@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateTodos } from "./_components/CreateTodos";
 import clsx from "clsx";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
@@ -16,11 +16,17 @@ export default function Top() {
   const todos = useTodoStore((state) => state.todos);
   //削除したタスクを保存する配列
   const deletedTodos = useDeletedTodoStore((state) => state.todos);
+  const { cleanOldTodos } = useDeletedTodoStore();
   //チェックされたタスクをIDで管理してカウントで使うための配列
   const selectedIds = useSelectedIdStore((state) => state.selectedIds);
   //履歴表示・非表示の状態管理
   const [showHistory, setShowHistory] = useState(false);
+console.log(selectedIds.length);
 
+  useEffect(() => {
+    // マウント時にだけ30日以上前のデータを削除
+    if (deletedTodos.length && cleanOldTodos) cleanOldTodos();
+  }, [cleanOldTodos]);
   return (
     <div>
       <div className="px-4 h-48">

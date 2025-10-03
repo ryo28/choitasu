@@ -3,7 +3,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -11,8 +10,10 @@ import {
 } from "@/components/ui/sheet";
 import { TextAlignStart } from "lucide-react";
 import { Logo } from "./Logo";
+import { InfoDialogs } from "./InfoDialogs";
+import PrivacyPolicy from "./PrivacyPolicy";
 
-export function SheetDemo() {
+export function Menu() {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -29,7 +30,11 @@ export function SheetDemo() {
         </SheetHeader>
         <footer className="grid flex-1 auto-rows-min gap-6 px-4">
           <div className="grid gap-3">このアプリについて</div>
-          <div className="grid gap-3">プライバシーポリシー</div>
+          <div className="grid gap-3">
+            <InfoDialogs title="プライバシーポリシー">
+              <PrivacyPolicy />
+            </InfoDialogs>
+          </div>
           <div className="grid gap-3">利用規約</div>
           <div className="grid gap-3">Contact</div>
           <div className="grid gap-3">

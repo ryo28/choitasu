@@ -1,4 +1,4 @@
-import { SheetDemo } from "./_components/Menu";
+import { Menu } from "./_components/Menu";
 import { Logo } from "./_components/Logo";
 
 export default function TopLayout({ children }: { children: React.ReactNode }) {
@@ -12,7 +12,7 @@ export default function TopLayout({ children }: { children: React.ReactNode }) {
               <Logo />
             </h1>
             <nav>
-              <SheetDemo />
+              <Menu />
             </nav>
           </div>
           <main>{children}</main>

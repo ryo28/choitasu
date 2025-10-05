@@ -42,7 +42,7 @@ const infoSectionsData = [
     title: "7. お問い合わせ",
     content: [
       "本プライバシーポリシーに関するご質問やご不明な点がございましたら、以下までお問い合わせください。",
-      "開発者: Waki",
+      "開発者: ワッキー",
       `最終更新日: ${new Date().toLocaleDateString("ja-JP")}`,
     ].join("\n"),
     link: "https://x.com/w_a59",

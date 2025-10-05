@@ -12,6 +12,7 @@ import { TextAlignStart } from "lucide-react";
 import { Logo } from "./Logo";
 import { InfoDialogs } from "./InfoDialogs";
 import PrivacyPolicy from "./PrivacyPolicy";
+import { AboutApp } from "./AboutApp";
 
 export function Menu() {
   return (
@@ -29,7 +30,11 @@ export function Menu() {
           </SheetTitle>
         </SheetHeader>
         <footer className="grid flex-1 auto-rows-min gap-6 px-4">
-          <div className="grid gap-3">このアプリについて</div>
+          <div className="grid gap-3">
+            <InfoDialogs title="このアプリについて">
+              <AboutApp />
+            </InfoDialogs>
+          </div>
           <div className="grid gap-3">
             <InfoDialogs title="プライバシーポリシー">
               <PrivacyPolicy />

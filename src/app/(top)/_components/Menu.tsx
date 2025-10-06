@@ -13,6 +13,7 @@ import { Logo } from "./Logo";
 import { InfoDialogs } from "./InfoDialogs";
 import PrivacyPolicy from "./PrivacyPolicy";
 import { AboutApp } from "./AboutApp";
+import Link from "next/link";
 
 export function Menu() {
   return (
@@ -40,8 +41,20 @@ export function Menu() {
               <PrivacyPolicy />
             </InfoDialogs>
           </div>
-          <div className="grid gap-3">利用規約</div>
-          <div className="grid gap-3">Contact</div>
+          <div className="grid gap-3">
+            <InfoDialogs title="利用規約">
+              <PrivacyPolicy />
+            </InfoDialogs>
+          </div>
+          <div className="grid gap-3">
+            <Link
+              href="https://x.com/w_a59"
+              target="_blank"
+              className="text-blue-500 hover:underline"
+            >
+              Contact
+            </Link>
+          </div>
           <div className="grid gap-3">
             © 2025~{new Date().getFullYear()} Waki. All rights reserved.
           </div>

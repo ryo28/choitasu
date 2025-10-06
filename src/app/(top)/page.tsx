@@ -63,7 +63,12 @@ export default function Top() {
           // 削除履歴にタスクがあれば表示、なければメッセージ表示
           deletedTodos.length ? (
             <div>
-              <h2 className="text-lg font-bold pb-4 px-4">削除履歴</h2>
+              <div className="flex px-4 pb-4 gap-4">
+                <h2 className="text-lg font-bold shrink-0">削除履歴</h2>
+                <p className="text-sm text-gray-500">
+                  削除履歴のタスクは30日経過後に自動的に削除されます
+                </p>
+              </div>
               <ul className="space-y-4 overflow-y-auto touch-pan-y max-h-[calc(100vh-400px)] md:max-h-[calc(100vh-350px)] py-4 px-2">
                 {deletedTodos
                   .slice()

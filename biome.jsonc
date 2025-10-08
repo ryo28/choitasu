@@ -9,7 +9,8 @@
 	"files": {
 		"includes": [
 			"**", // 全体
-			"!**/public" // publicディレクトリ除外（./は不要）
+			"!**/public", // publicディレクトリ除外（./は不要）
+			"!**/src/app/globals.css" // globals.css 除外（Biome v2.3で修正予定のバグ回避）
 		],
 		"ignoreUnknown": false //Biome がサポートしていない拡張子のファイルを無視するか
 	},
@@ -21,7 +22,15 @@
 		"enabled": true, //Lint（構文・品質チェック）を有効にするか
 		"rules": {
 			"recommended": true, //推奨ルールセットを有効にするか
-			"nursery": { "useSortedClasses": "warn" }
+			"nursery": {
+				"useSortedClasses": {
+					"fix": "safe",
+					"level": "error",
+					"options": {
+						"functions": ["twMerge", "twJoin", "cn"]
+					}
+				}
+			} //Tailwind CSSのクラス名をアルファベット順に並べるルールを有効にするか
 		}
 	},
 	"javascript": {

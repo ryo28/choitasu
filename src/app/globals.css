@@ -1,8 +1,16 @@
+/* 
+  Biome v2.3 で @custom-variant の解析バグが修正予定。
+  それまでリンターから globals.css を除外しています。
+  （詳細: https://github.com/biomejs/biome/issues/7223）
+*/
+
+
 @import "tailwindcss";
 @import "tw-animate-css";
 /*
      ---break---
      */
+	 
 @custom-variant dark (&:is(.dark *));
 @plugin "tailwindcss-react-aria-components";
 

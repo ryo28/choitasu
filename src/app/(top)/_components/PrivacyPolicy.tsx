@@ -1,4 +1,3 @@
-import React from "react";
 import { InfoSections } from "./InfoSections";
 
 const infoSectionsData = [
@@ -51,10 +50,10 @@ const infoSectionsData = [
 
 export default function PrivacyPolicy() {
 	return (
-		<div className="h-full overflow-y-auto max-h-96 py-6 space-y-6 text-sm">
-			{infoSectionsData.map((section, index) => (
+		<div className="h-full max-h-96 space-y-6 overflow-y-auto py-6 text-sm">
+			{infoSectionsData.map((section) => (
 				<InfoSections
-					key={index}
+					key={section.title}
 					title={section.title}
 					content={section.content}
 					link={section.link}

@@ -4,10 +4,11 @@ export function Logo() {
 	return (
 		<Image
 			src={"/logo.png"}
+			priority
 			alt="logo"
 			width={250}
 			height={150}
-			className="w-24 h-24"
+			className="h-24 w-24"
 		/>
 	);
 }

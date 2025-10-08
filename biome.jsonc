@@ -24,13 +24,14 @@
 			"recommended": true, //推奨ルールセットを有効にするか
 			"nursery": {
 				"useSortedClasses": {
-					"fix": "safe",
-					"level": "error",
+					//Tailwind CSSのソートルール
+					"fix": "safe", //自動修正を有効
+					"level": "error", //違反をエラーとして報告
 					"options": {
 						"functions": ["twMerge", "twJoin", "cn"]
 					}
 				}
-			} //Tailwind CSSのクラス名をアルファベット順に並べるルールを有効にするか
+			}
 		}
 	},
 	"javascript": {

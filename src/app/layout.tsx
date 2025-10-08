@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ちょいタス",
-  description: "超シンプルで使いやすいタスク管理アプリ",
+	title: "ちょいタス",
+	description: "超シンプルで使いやすいタスク管理アプリ",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="ja">
-      <body className="text-gray-800">{children}</body>
-    </html>
-  );
+	return (
+		<html lang="ja">
+			<body className="text-gray-800">{children}</body>
+		</html>
+	);
 }

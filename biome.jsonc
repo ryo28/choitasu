@@ -1,0 +1,42 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
+	"vcs": {
+		//バージョン管理システムの設定
+		"enabled": true,
+		"clientKind": "git", //Git, Mercurial, Subversion など
+		"useIgnoreFile": true //.gitignoreに基づいて無視するファイルを決定するか
+	},
+	"files": {
+		"includes": [
+			"**", // 全体
+			"!**/public" // publicディレクトリ除外（./は不要）
+		],
+		"ignoreUnknown": false //Biome がサポートしていない拡張子のファイルを無視するか
+	},
+	"formatter": {
+		"enabled": true, //コードフォーマッタを有効にするか
+		"indentStyle": "tab" //インデントにタブを使うかスペースを使うか
+	},
+	"linter": {
+		"enabled": true, //Lint（構文・品質チェック）を有効にするか
+		"rules": {
+			"recommended": true, //推奨ルールセットを有効にするか
+			"nursery": { "useSortedClasses": "warn" }
+		}
+	},
+	"javascript": {
+		//JavaScript 固有の設定
+		"formatter": {
+			"quoteStyle": "double" //ダブルクォートを使うかシングルクォートを使うか
+		}
+	},
+	"assist": {
+		//コード補完やリファクタリング支援の設定
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on" //インポート文の整理を自動で行うか
+			}
+		}
+	}
+}

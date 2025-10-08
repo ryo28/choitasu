@@ -22,7 +22,7 @@ export function TodoListItems() {
 	const selectedIds = useSelectedIdStore((state) => state.selectedIds);
 	const setSelectedIds = useSelectedIdStore((state) => state.setSelectedIds);
 	return (
-		<ul className="space-y-2 overflow-y-auto touch-pan-y max-h-[calc(100vh-400px)] md:max-h-[calc(100vh-350px)] py-4 px-2">
+		<ul className="max-h-[calc(100vh-400px)] touch-pan-y space-y-2 overflow-y-auto px-2 py-4 md:max-h-[calc(100vh-350px)]">
 			{todos
 				.slice()
 				.reverse()
@@ -30,11 +30,11 @@ export function TodoListItems() {
 					<SortableItem key={todo.id} id={todo.id}>
 						<div
 							className={clsx(
-								"flex justify-between py-4 px-4 rounded-2xl hover:opacity-75 items-center",
+								"flex items-center justify-between rounded-2xl px-4 py-4 hover:opacity-75",
 								todo.color,
 							)}
 						>
-							<div className="flex items-center flex-1">
+							<div className="flex flex-1 items-center">
 								<Checkbox
 									value={todo.text}
 									id={todo.id}
@@ -59,7 +59,7 @@ export function TodoListItems() {
 								</label>
 							</div>
 
-							<div className="shrink-0 flex gap-8 pl-2">
+							<div className="flex shrink-0 gap-8 pl-2">
 								{/* bgカラー変更ボタン */}
 								<TaskColorChangeButton id={todo.id} colors={colors} />
 								{/* タスク削除しつつ削除履歴に追加ボタン */}

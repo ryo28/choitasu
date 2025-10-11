@@ -5,6 +5,7 @@ import {
 	Sheet,
 	SheetClose,
 	SheetContent,
+	SheetDescription,
 	SheetFooter,
 	SheetHeader,
 	SheetTitle,
@@ -26,9 +27,11 @@ export function Menu() {
 			</SheetTrigger>
 			<SheetContent>
 				<SheetHeader>
-					<SheetTitle>
-						<Logo />
-					</SheetTitle>
+					<Logo />
+					<SheetTitle className="sr-only">メニュー</SheetTitle>
+					<SheetDescription className="sr-only">
+						アプリの情報やお問い合わせはこちらから
+					</SheetDescription>
 				</SheetHeader>
 				<footer className="grid flex-1 auto-rows-min gap-6 px-4">
 					<div className="grid gap-3">

@@ -59,7 +59,7 @@ export function Menu() {
 						</Link>
 					</div>
 					<div className="grid gap-3">
-						© 2025~{new Date().getFullYear()} Waki. All rights reserved.
+						© 2025~{new Date().getFullYear()} ちょいタス. All rights reserved.
 					</div>
 				</footer>
 				<SheetFooter>

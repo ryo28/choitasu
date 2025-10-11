@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
+	DialogDescription,
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
@@ -23,6 +24,9 @@ export function InfoDialogs({ title, children }: DialogDemoProps) {
 				<DialogContent className="sm:max-w-[425px]">
 					<DialogHeader>
 						<DialogTitle>{title}</DialogTitle>
+						<DialogDescription className="sr-only">
+							{title}の詳細情報
+						</DialogDescription>
 						<div>{children}</div>
 					</DialogHeader>
 					<DialogFooter></DialogFooter>

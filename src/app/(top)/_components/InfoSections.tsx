@@ -1,25 +1,12 @@
 import Link from "next/link";
-
-type LinkItem = {
-	link: string;
-	linkText: string;
-};
-
-type InfoSectionsProps = {
-	title: string;
-	content: string;
-	links?: LinkItem[];
-	link?: string;
-	linkText?: string;
-};
-
+import type { InfoSectionData } from "./_menu/types";
 export function InfoSections({
 	title,
 	content,
 	links,
 	link,
 	linkText,
-}: InfoSectionsProps) {
+}: InfoSectionData) {
 	const renderLinks = () => {
 		// 1️⃣ linksがある場合 → リスト表示
 		if (links?.length) {
@@ -43,12 +30,14 @@ export function InfoSections({
 
 		// 2️⃣ link単体がある場合
 		if (link) {
+			// 内部リンク（/で始まる）か外部リンクかを判定
+			const isInternalLink = link.startsWith("/");
+
 			return (
 				<div className="mt-3">
 					<Link
 						href={link}
-						target="_blank"
-						rel="noreferrer"
+						{...(!isInternalLink && { target: "_blank", rel: "noreferrer" })}
 						className="text-blue-500 hover:underline"
 					>
 						{/* 3️⃣ linkTextがある場合はそれを優先 */}

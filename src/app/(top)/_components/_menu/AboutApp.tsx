@@ -1,6 +1,7 @@
 import { InfoSections } from "../InfoSections";
+import type { InfoSectionData } from "./types";
 
-const infoSectionsData = [
+const infoSectionsData: InfoSectionData[] = [
 	{
 		title: "1. アプリ概要",
 		content:

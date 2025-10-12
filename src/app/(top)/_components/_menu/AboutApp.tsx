@@ -46,7 +46,7 @@ const infoSectionsData: InfoSectionData[] = [
 			"",
 			"開発者: ワッキー",
 			"バージョン: 1.0.0",
-			`最終更新日: ${new Date().toLocaleDateString("ja-JP")}`,
+			"最終更新日: 2025年10月12日",
 		].join("\n"),
 		link: "https://x.com/w_a59",
 	},

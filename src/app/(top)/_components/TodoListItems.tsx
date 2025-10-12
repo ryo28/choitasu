@@ -27,46 +27,48 @@ export function TodoListItems() {
 				.slice()
 				.reverse()
 				.map((todo) => (
-					<SortableItem key={todo.id} id={todo.id}>
-						<div
-							className={clsx(
-								"flex items-center justify-between rounded-2xl px-4 py-4 hover:opacity-75",
-								todo.color,
-							)}
-						>
-							<div className="flex flex-1 items-center">
-								<Checkbox
-									value={todo.text}
-									id={todo.id}
-									isSelected={selectedIds.includes(todo.id)}
-									onChange={(checked) => {
-										setSelectedIds(
-											(prev) =>
-												checked
-													? [...prev, todo.id] // チェックされたら追加
-													: prev.filter((id) => id !== todo.id), // 外されたら削除
-										);
-									}}
-								/>
-								<label
-									htmlFor={todo.id}
-									className={clsx(
-										"ml-3 flex-1",
-										selectedIds.includes(todo.id) ? "line-through" : "",
-									)}
-								>
-									<div>{todo.text}</div>
-								</label>
-							</div>
+					<li key={todo.id}>
+						<SortableItem id={todo.id}>
+							<div
+								className={clsx(
+									"flex items-center justify-between rounded-2xl px-4 py-4 hover:opacity-75",
+									todo.color,
+								)}
+							>
+								<div className="flex flex-1 items-center">
+									<Checkbox
+										value={todo.text}
+										id={todo.id}
+										isSelected={selectedIds.includes(todo.id)}
+										onChange={(checked) => {
+											setSelectedIds(
+												(prev) =>
+													checked
+														? [...prev, todo.id] // チェックされたら追加
+														: prev.filter((id) => id !== todo.id), // 外されたら削除
+											);
+										}}
+									/>
+									<label
+										htmlFor={todo.id}
+										className={clsx(
+											"ml-3 flex-1",
+											selectedIds.includes(todo.id) ? "line-through" : "",
+										)}
+									>
+										<div>{todo.text}</div>
+									</label>
+								</div>
 
-							<div className="flex shrink-0 gap-8 pl-2">
-								{/* bgカラー変更ボタン */}
-								<TaskColorChangeButton id={todo.id} colors={colors} />
-								{/* タスク削除しつつ削除履歴に追加ボタン */}
-								<DeletedTaskButton id={todo.id} />
+								<div className="flex shrink-0 gap-8 pl-2">
+									{/* bgカラー変更ボタン */}
+									<TaskColorChangeButton id={todo.id} colors={colors} />
+									{/* タスク削除しつつ削除履歴に追加ボタン */}
+									<DeletedTaskButton id={todo.id} />
+								</div>
 							</div>
-						</div>
-					</SortableItem>
+						</SortableItem>
+					</li>
 				))}
 		</ul>
 	);

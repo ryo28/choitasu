@@ -11,9 +11,9 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
+import { InfoDialogs } from "../InfoDialogs";
+import { Logo } from "../Logo";
 import { AboutApp } from "./AboutApp";
-import { InfoDialogs } from "./InfoDialogs";
-import { Logo } from "./Logo";
 import PrivacyPolicy from "./PrivacyPolicy";
 
 export function Menu() {

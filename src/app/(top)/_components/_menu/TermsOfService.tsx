@@ -1,4 +1,4 @@
-import { InfoSections } from "./InfoSections";
+import { InfoSections } from "../InfoSections";
 
 const termsOfServiceData = [
 	{

@@ -1,5 +1,5 @@
+import { Menu } from "./_components/_menu/Menu";
 import { Logo } from "./_components/Logo";
-import { Menu } from "./_components/Menu";
 export default function TopLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="fixed top-2 right-0 bottom-0 left-0 bg-gray-50">

@@ -15,6 +15,7 @@ import { InfoDialogs } from "../InfoDialogs";
 import { Logo } from "../Logo";
 import { AboutApp } from "./AboutApp";
 import PrivacyPolicy from "./PrivacyPolicy";
+import { TermsOfService } from "./TermsOfService";
 
 export function Menu() {
 	return (
@@ -46,7 +47,7 @@ export function Menu() {
 					</div>
 					<div className="grid gap-3">
 						<InfoDialogs title="利用規約">
-							<PrivacyPolicy />
+							<TermsOfService />
 						</InfoDialogs>
 					</div>
 					<div className="grid gap-3">

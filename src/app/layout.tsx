@@ -21,11 +21,11 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "ちょいタス - シンプルなタスク管理アプリ",
 		description: "ログイン不要で今すぐ使える無料のTodoアプリ",
-		url: "https://choitasu.vercel.app", // 独自ドメインに変更
+		url: process.env.NEXT_PUBLIC_SITE_URL || "https://choitasu.vercel.app",
 		siteName: "ちょいタス",
 		images: [
 			{
-				url: "https://choitasu.vercel.app/og-image.png",
+				url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://choitasu.vercel.app"}/og-image.png`,
 				width: 1200,
 				height: 630,
 			},
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "ちょいタス",
 		description: "シンプルで使いやすい無料タスク管理アプリ",
-		images: ["https://choitasu.vercel.app/og-image.png"],
+		images: [`${process.env.NEXT_PUBLIC_SITE_URL || "https://choitasu.vercel.app"}/og-image.png`],
 	},
 	robots: {
 		index: true,
@@ -56,7 +56,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ja">
-			<GoogleTagManager gtmId="G-NYZJB75MST" />
+			<GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ""} />
 			<body className="text-gray-800">{children}</body>
 		</html>
 	);

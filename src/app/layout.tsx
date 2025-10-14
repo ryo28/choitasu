@@ -23,27 +23,6 @@ export const metadata: Metadata = {
 		"チェックリスト",
 		"やることリスト",
 	].join(","),
-	openGraph: {
-		title: "ちょいタス - シンプルなタスク管理アプリ",
-		description: "ログイン不要で今すぐ使える無料のTodoアプリ",
-		url: baseUrl,
-		siteName: "ちょいタス",
-		images: [
-			{
-				url: `${baseUrl}/og-image.png`,
-				width: 1200,
-				height: 630,
-			},
-		],
-		locale: "ja_JP",
-		type: "website",
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: "ちょいタス",
-		description: "シンプルで使いやすい無料タスク管理アプリ",
-		images: [`${baseUrl}/og-image.png`],
-	},
 	robots: {
 		index: true,
 		follow: true,

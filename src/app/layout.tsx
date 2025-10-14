@@ -2,6 +2,11 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import "./globals.css";
 
+ const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://choitasu.com"
+    : "http://localhost:3000";
+
 export const metadata: Metadata = {
 	title: "ちょいタス | シンプルで使いやすい無料タスク管理アプリ",
 	description:
@@ -21,11 +26,11 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "ちょいタス - シンプルなタスク管理アプリ",
 		description: "ログイン不要で今すぐ使える無料のTodoアプリ",
-		url: process.env.NEXT_PUBLIC_SITE_URL || "https://choitasu.vercel.app",
+		url: baseUrl,
 		siteName: "ちょいタス",
 		images: [
 			{
-				url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://choitasu.vercel.app"}/og-image.png`,
+				url: `${baseUrl}/og-image.png`,
 				width: 1200,
 				height: 630,
 			},
@@ -37,7 +42,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "ちょいタス",
 		description: "シンプルで使いやすい無料タスク管理アプリ",
-		images: [`${process.env.NEXT_PUBLIC_SITE_URL || "https://choitasu.vercel.app"}/og-image.png`],
+		images: [`${baseUrl}/og-image.png`],
 	},
 	robots: {
 		index: true,

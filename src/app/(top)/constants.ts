@@ -5,7 +5,7 @@
 /**
  * タスクの最大保持数
  */
-export const MAX_TODOS = 8;
+export const MAX_TODOS = 100;
 
 /**
  * 削除履歴の保持期間（日数）

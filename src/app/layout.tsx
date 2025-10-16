@@ -2,11 +2,6 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import "./globals.css";
 
- const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://choitasu.com"
-    : "http://localhost:3000";
-
 export const metadata: Metadata = {
 	title: "ちょいタス | シンプルで使いやすい無料タスク管理アプリ",
 	description:

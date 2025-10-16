@@ -3,8 +3,10 @@
 import clsx from "clsx";
 import { History } from "lucide-react";
 import { useEffect, useState } from "react";
+import { DELETED_HISTORY_RETENTION_DAYS } from "./constants";
 import { CreateTodos } from "./_components/CreateTodos";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
+import { ErrorToast } from "./_components/ErrorToast";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
 import SortableExample from "./_components/SortableExample";
 import { useDeletedTodoStore } from "./_store/deletedTodoStore";
@@ -23,11 +25,13 @@ export default function Top() {
 	const [showHistory, setShowHistory] = useState(false);
 
 	useEffect(() => {
-		// マウント時にだけ30日以上前のデータを削除
+		// マウント時にだけ指定日数以上前のデータを削除
 		if (deletedTodos.length && cleanOldTodos) cleanOldTodos();
 	}, [cleanOldTodos, deletedTodos.length]);
 	return (
 		<div>
+			{/* エラートースト */}
+			<ErrorToast />
 			<div className="h-48 px-4">
 				{/* 完了タスクカウンター */}
 				<div className="flex flex-1 justify-center gap-2 py-2">
@@ -68,7 +72,8 @@ export default function Top() {
 							<div className="flex gap-4 px-4 pb-4">
 								<h2 className="shrink-0 font-bold text-lg">削除履歴</h2>
 								<p className="text-gray-500 text-sm">
-									削除履歴のタスクは30日経過後に自動的に削除されます
+									削除履歴のタスクは{DELETED_HISTORY_RETENTION_DAYS}
+									日経過後に自動的に削除されます
 								</p>
 							</div>
 							<ul className="max-h-[calc(100vh-400px)] touch-pan-y space-y-4 overflow-y-auto px-2 py-4 md:max-h-[calc(100vh-350px)]">

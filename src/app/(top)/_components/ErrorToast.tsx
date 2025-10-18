@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 import { X } from "lucide-react";
+import { useEffect } from "react";
 import { useTodoStore } from "../_store/todoStore";
 
 export function ErrorToast() {
@@ -22,7 +22,7 @@ export function ErrorToast() {
 	if (!error) return null;
 
 	return (
-		<div className="fixed top-4 left-1/2 z-50 -translate-x-1/2 animate-in fade-in slide-in-from-top-2">
+		<div className="-translate-x-1/2 fade-in slide-in-from-top-2 fixed top-4 left-1/2 z-50 animate-in">
 			<div className="flex items-center gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 shadow-lg">
 				<div className="flex-1">
 					<p className="font-medium text-red-800 text-sm">{error}</p>

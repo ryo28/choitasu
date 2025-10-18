@@ -1,8 +1,8 @@
 import { clsx } from "clsx";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { MAX_TODOS } from "../constants";
 import { useTodoStore } from "../_store/todoStore";
+import { MAX_TODOS } from "../constants";
 
 export function CreateTodos() {
 	const todos = useTodoStore((state) => state.todos);

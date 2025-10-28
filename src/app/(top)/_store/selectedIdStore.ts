@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, subscribeWithSelector } from "zustand/middleware";
 
 type SelectedIdStore = {
 	selectedIds: string[];
@@ -7,14 +7,17 @@ type SelectedIdStore = {
 };
 
 export const useSelectedIdStore = create<SelectedIdStore>()(
-	persist(
-		(set) => ({
-			selectedIds: [],
-			setSelectedIds: (ids) =>
-				set((state) => ({
-					selectedIds: typeof ids === "function" ? ids(state.selectedIds) : ids,
-				})),
-		}),
-		{ name: "selected-id-storage" },
+	subscribeWithSelector(
+		persist(
+			(set) => ({
+				selectedIds: [],
+				setSelectedIds: (ids) =>
+					set((state) => ({
+						selectedIds:
+							typeof ids === "function" ? ids(state.selectedIds) : ids,
+					})),
+			}),
+			{ name: "selected-id-storage" },
+		),
 	),
 );

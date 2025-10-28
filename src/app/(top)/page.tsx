@@ -3,17 +3,23 @@
 import clsx from "clsx";
 import { History } from "lucide-react";
 import { useEffect, useState } from "react";
-import { DELETED_HISTORY_RETENTION_DAYS } from "./constants";
 import { CreateTodos } from "./_components/CreateTodos";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { ErrorToast } from "./_components/ErrorToast";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
 import SortableExample from "./_components/SortableExample";
+import { useBroadcastSync } from "./_hooks/useBroadcastSync";
 import { useDeletedTodoStore } from "./_store/deletedTodoStore";
 import { useSelectedIdStore } from "./_store/selectedIdStore";
 import { useTodoStore } from "./_store/todoStore";
+import { DELETED_HISTORY_RETENTION_DAYS } from "./constants";
 
 export default function Top() {
+	// 複数タブ間でのBroadcastChannel同期を有効化
+	useBroadcastSync(useTodoStore, "todo-sync", "todos");
+	useBroadcastSync(useDeletedTodoStore, "deleted-todo-sync", "todos");
+	useBroadcastSync(useSelectedIdStore, "selected-id-sync", "selectedIds");
+
 	//タスクを保存する配列
 	const todos = useTodoStore((state) => state.todos);
 	//削除したタスクを保存する配列

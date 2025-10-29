@@ -2,19 +2,11 @@ import clsx from "clsx";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSelectedIdStore } from "../_store/selectedIdStore";
 import { useTodoStore } from "../_store/todoStore";
+import { TASK_COLORS } from "../constants";
 import { DeletedTaskButton } from "./DeletedTaskButton";
 import { SortableItem } from "./SortableItem";
 import { TaskColorChangeButton } from "./TaskColorChangeButton";
 
-//タスクの背景色の候補
-const colors = [
-	"bg-red-100",
-	"bg-green-100",
-	"bg-blue-100",
-	"bg-yellow-100",
-	"bg-purple-100",
-	"bg-white",
-];
 export function TodoListItems() {
 	// useSortable は SortableItem 内で使用されるため、ここでは不要
 	const todos = useTodoStore((state) => state.todos);
@@ -62,7 +54,7 @@ export function TodoListItems() {
 
 								<div className="flex shrink-0 gap-8 pl-2">
 									{/* bgカラー変更ボタン */}
-									<TaskColorChangeButton id={todo.id} colors={colors} />
+									<TaskColorChangeButton id={todo.id} colors={TASK_COLORS} />
 									{/* タスク削除しつつ削除履歴に追加ボタン */}
 									<DeletedTaskButton id={todo.id} />
 								</div>

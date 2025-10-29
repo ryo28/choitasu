@@ -17,6 +17,7 @@ export function SortableItem({
 		setActivatorNodeRef, // ドラッグハンドル用
 		transform,
 		transition,
+		isDragging, // ドラッグ中かどうか
 	} = useSortable({ id: id });
 	//attributes: アクセシビリティ用の属性
 	// listeners: ドラッグイベントのリスナー（ハンドル専用に移動）
@@ -24,10 +25,12 @@ export function SortableItem({
 	// setActivatorNodeRef: ドラッグハンドル専用の参照
 	// transform: ドラッグ中の移動量（x, y座標）
 	// transition: アニメーション用のトランジション
+	// isDragging: DragOverlayで表示中は元の位置を半透明にする
 
 	const style = {
 		transform: CSS.Transform.toString(transform), // ドラッグ時の移動を視覚化
 		transition, // スムーズなアニメーション
+		opacity: isDragging ? 0 : 1, // ドラッグ中は半透明
 	};
 
 	return (

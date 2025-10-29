@@ -4,6 +4,8 @@ import {
 	closestCenter,
 	DndContext,
 	type DragEndEvent,
+	DragOverlay,
+	type DragStartEvent,
 	KeyboardSensor,
 	PointerSensor,
 	useSensor,
@@ -16,14 +18,18 @@ import {
 	sortableKeyboardCoordinates,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useId } from "react";
+import { useId, useState } from "react";
 import { useTodoStore } from "../_store/todoStore";
+import { DragPreview } from "./DragPreview";
 import { TodoListItems } from "./TodoListItems";
 
 export default function SortableExample() {
 	//履歴表示・非表示の状態管理
 	const todos = useTodoStore((state) => state.todos);
 	const setTodos = useTodoStore((state) => state.setTodos);
+
+	// ドラッグ中のアイテムIDを保持
+	const [activeId, setActiveId] = useState<string | null>(null);
 
 	// ドラッグ操作のセンサー設定 - スマホ対応強化
 	const sensors = useSensors(
@@ -38,6 +44,11 @@ export default function SortableExample() {
 		}),
 	);
 
+	// ドラッグ開始時の処理
+	function handleDragStart(event: DragStartEvent) {
+		setActiveId(event.active.id as string);
+	}
+
 	// ドラッグ終了時の処理
 	function handleDragEnd(event: DragEndEvent) {
 		const { active, over } = event;
@@ -51,16 +62,23 @@ export default function SortableExample() {
 				return arrayMove(items, oldIndex, newIndex);
 			});
 		}
+
+		setActiveId(null);
 	}
+
+	// ドラッグ中のアイテムを取得
+	const activeItem = activeId
+		? todos.find((todo) => todo.id === activeId)
+		: null;
 
 	return (
 		<div>
 			{/* DndContext: ドラッグ&ドロップの範囲を定義 - 縦方向のみに制限 */}
-
 			<DndContext
 				id={useId()}
 				sensors={sensors}
 				collisionDetection={closestCenter}
+				onDragStart={handleDragStart}
 				onDragEnd={handleDragEnd}
 				modifiers={[restrictToVerticalAxis]} // 縦方向のみの移動に制限
 			>
@@ -68,6 +86,11 @@ export default function SortableExample() {
 				<SortableContext items={todos} strategy={verticalListSortingStrategy}>
 					<TodoListItems />
 				</SortableContext>
+
+				{/* DragOverlay: ドラッグ中のアイテムのプレビュー */}
+				<DragOverlay>
+					{activeItem ? <DragPreview todo={activeItem} /> : null}
+				</DragOverlay>
 			</DndContext>
 		</div>
 	);

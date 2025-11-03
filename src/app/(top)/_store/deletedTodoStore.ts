@@ -39,7 +39,58 @@ export const useDeletedTodoStore = create<TodoState<DeletedTodo>>()(
 					set({ todos: validTodos });
 				},
 			}),
-			{ name: "deleted-todo-storage" },
+			{
+				name: "deleted-todo-storage",
+				// localStorage容量超過エラーのハンドリング
+				onRehydrateStorage: () => (state, error) => {
+					if (error) {
+						console.error("localStorage読み込みエラー:", error);
+						state?.setError(
+							"削除履歴の読み込みに失敗しました。ブラウザのストレージをご確認ください。",
+						);
+					}
+				},
+				storage: {
+					getItem: (name) => {
+						try {
+							const str = localStorage.getItem(name);
+							return str ? JSON.parse(str) : null;
+						} catch (error) {
+							console.error("localStorage読み込みエラー:", error);
+							return null;
+						}
+					},
+					setItem: (name, value) => {
+						try {
+							localStorage.setItem(name, JSON.stringify(value));
+						} catch (error) {
+							console.error("localStorage保存エラー:", error);
+							if (
+								error instanceof DOMException &&
+								(error.name === "QuotaExceededError" ||
+									error.name === "NS_ERROR_DOM_QUOTA_REACHED")
+							) {
+								const state = useDeletedTodoStore.getState();
+								state.setError(
+									"ストレージ容量が不足しています。削除履歴をクリアしてください。",
+								);
+							} else {
+								const state = useDeletedTodoStore.getState();
+								state.setError(
+									"削除履歴の保存に失敗しました。ブラウザの設定をご確認ください。",
+								);
+							}
+						}
+					},
+					removeItem: (name) => {
+						try {
+							localStorage.removeItem(name);
+						} catch (error) {
+							console.error("localStorage削除エラー:", error);
+						}
+					},
+				},
+			},
 		),
 	),
 );

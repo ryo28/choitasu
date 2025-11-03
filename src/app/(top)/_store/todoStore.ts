@@ -35,6 +35,59 @@ export const useTodoStore = create<TodoState>()(
 			}),
 			{
 				name: "todo-storage", // localStorage のキー名
+				// localStorage容量超過エラーのハンドリング
+				onRehydrateStorage: () => (state, error) => {
+					if (error) {
+						console.error("localStorage読み込みエラー:", error);
+						// エラーメッセージを設定
+						state?.setError(
+							"データの読み込みに失敗しました。ブラウザのストレージをご確認ください。",
+						);
+					}
+				},
+				// 保存時のエラーハンドリング
+				storage: {
+					getItem: (name) => {
+						try {
+							const str = localStorage.getItem(name);
+							return str ? JSON.parse(str) : null;
+						} catch (error) {
+							console.error("localStorage読み込みエラー:", error);
+							return null;
+						}
+					},
+					setItem: (name, value) => {
+						try {
+							localStorage.setItem(name, JSON.stringify(value));
+						} catch (error) {
+							console.error("localStorage保存エラー:", error);
+							// QuotaExceededError（容量超過）の場合
+							if (
+								error instanceof DOMException &&
+								(error.name === "QuotaExceededError" ||
+									error.name === "NS_ERROR_DOM_QUOTA_REACHED")
+							) {
+								// エラーをストアに設定
+								const state = useTodoStore.getState();
+								state.setError(
+									"ストレージ容量が不足しています。古いタスクを削除してください。",
+								);
+							} else {
+								const state = useTodoStore.getState();
+								state.setError(
+									"データの保存に失敗しました。ブラウザの設定をご確認ください。",
+								);
+							}
+						}
+					},
+					removeItem: (name) => {
+						try {
+							localStorage.removeItem(name);
+						} catch (error) {
+							console.error("localStorage削除エラー:", error);
+						}
+					},
+				},
 			},
 		),
 	),

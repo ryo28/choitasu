@@ -23,8 +23,7 @@ import { useTodoStore } from "../_store/todoStore";
 import { DragPreview } from "./DragPreview";
 import { TodoListItems } from "./TodoListItems";
 
-export default function SortableExample() {
-	//履歴表示・非表示の状態管理
+export default function TodoList() {
 	const todos = useTodoStore((state) => state.todos);
 	const setTodos = useTodoStore((state) => state.setTodos);
 

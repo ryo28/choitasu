@@ -7,7 +7,7 @@ import { CreateTodos } from "./_components/CreateTodos";
 import { DeletedHistoryButton } from "./_components/DeletedHistoryButton";
 import { ErrorToast } from "./_components/ErrorToast";
 import { RestoreHistoryButton } from "./_components/RestoreHistoryButton";
-import SortableExample from "./_components/SortableExample";
+import TodoList from "./_components/TodoList";
 import { useBroadcastSync } from "./_hooks/useBroadcastSync";
 import { useDeletedTodoStore } from "./_store/deletedTodoStore";
 import { useSelectedIdStore } from "./_store/selectedIdStore";
@@ -125,7 +125,7 @@ export default function Top() {
 					<div className="min-h-[calc(100vh-350px)]">
 						<h2 className="px-4 font-bold text-lg">タスク</h2>
 						{/* ドラッグ入れ替え可能なリスト */}
-						<SortableExample />
+						<TodoList />
 					</div>
 				)}
 			</div>

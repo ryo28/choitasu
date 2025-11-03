@@ -1,7 +1,7 @@
 import { Undo2 } from "lucide-react";
-import { MAX_TODOS } from "../constants";
 import { useDeletedTodoStore } from "../_store/deletedTodoStore";
 import { useTodoStore } from "../_store/todoStore";
+import { MAX_TODOS } from "../constants";
 
 //タスク削除ボタンをしつつ、削除したタスクをdeletedTodosに履歴として追加するコンポーネント
 export function RestoreHistoryButton({ id: todoId }: { id: string }) {
